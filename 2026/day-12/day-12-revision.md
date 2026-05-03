@@ -78,4 +78,20 @@ As of now i have learned the below topics in linux operating system and their re
   Through the private keys we can ssh into the instance through the terminal.
   Also learned concept of Jump/bastian hosting which basically means we create two instances and connect them by creating the private keys we create key and copy the pub keys into the other instance.
 
-  
+
+  #Networking commands:
+
+  1)ping- to check the basic connectivity between our machine and the host we use ping.
+  2)ss -tuln-will give us info of the ports listening or not.
+  3)ip addr -will give us our ip related details.
+  4) ssh -i - to Securely log into remote machines.
+  5)traceroute- to trace the routes of packets transmission.
+
+
+
+Summary-
+I learned why linux is called the basic part of learning devops.
+Around 90% of the services run on linux operating system.
+Linux is available as GPL so anyone can modify it he/she just needs to share those change publicly.
+Linux is very much secure as we can access the remote server locally with pair of keys which makes it secure.
+I feel linux is not just a operating system it is an whole playground.
