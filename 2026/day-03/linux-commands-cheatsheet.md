@@ -27,6 +27,7 @@
 3.passwd-to set password to a user.
 4.useradd -m-to add user with directory.
 5.gpasswd -a,-d - to add and delete users into the group.
+6.sudo groupadd groupname-to add new group.
 
 *Package installer:
 1.sudo apt update-updated the whole system and download the packages.
