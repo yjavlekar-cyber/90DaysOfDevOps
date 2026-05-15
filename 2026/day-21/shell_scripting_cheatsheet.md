@@ -78,3 +78,38 @@
                                                     "banana" | "plantain")
                                                     echo "Bananas provide instant energy."
                                              esac
+Task 3: Loops
+1. for loop — list-based and C-style-
+   for loops are used to iterate or list down the date from a list.
+   list-for i in {1..5}
+   do
+         echo $i
+   done
+  
+   c-style- is used for arithmetic type logics
+   for (( num=1 ; num<=10 ; num ++ ))
+   do
+            echo $num
+   done
+
+2. while loop- this is basically a true loop if the logic is true then the command will keep iterating until we stop it.
+read -p "enter your number:" number
+
+while [ "$number" -gt 10 ]
+do
+
+        echo "Greater"
+        exit 1
+done
+echo "less"
+
+3.Until loop- This is opposite to the while loop it basically false loop it says until this logic is true do this and done infinetly till we stop it.
+read -p "enter your number:" number
+
+until  [ "$number" -gt 10 ]
+do
+
+        echo "less"
+        exit 1
+done
+echo "greater"
