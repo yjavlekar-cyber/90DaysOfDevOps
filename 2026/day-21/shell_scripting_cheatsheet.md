@@ -113,3 +113,49 @@ do
         exit 1
 done
 echo "greater"
+
+
+4.Loop control — break, continue
+break- In shell scripting break acts as a stop button which gets triggered when the condition is fullfilled just like in below script if you see if the number is greater than 10 it will stop the infinty loop of greater but will also continue to run the next command which is to print less it doesnot stop overall script just the particular condition.
+e.g
+#!/bin/bash
+
+read -p "enter your number:" number
+
+        while [ "$number" -gt 10 ]
+        do
+                echo "greater"
+                break
+        done
+echo "less"
+
+continue:This basically skips whichever condition we set from to final output just like in below example we are iterating numbers from 1-5 but there is condition if i is 4 skip it so the output will only give us numbers other than 4.
+e.g
+#!/bin/bash
+for i in {1..5}
+do
+        if [ $i = 4 ];then
+                continue
+        fi
+        echo $i
+done
+
+5.Looping over files- to list down the files we can use belwo script where whetever file type we have mentioned after asteric it will iterate those files just like in below script the output was all the .log files were listed.
+e.g
+Script-
+ for file in *.log
+ do
+         echo $file
+ done
+
+5.Looping over command output — while read line
+while read line lets as read the data inside the file and also we can run commands using the data inside the file.
+for eg we have a file with usernames and departments we want to make directories of those usernames we will use whil read line which we read the data each line at time and will do mkdir on those line.
+e.g
+Script-
+while IFS=":" read -r username department
+do
+        echo "processing $username"
+        sudo mkdir -p "/home/yogesh_jawlekar/script/day21/company/$department/$username"
+done < users.txt
+
