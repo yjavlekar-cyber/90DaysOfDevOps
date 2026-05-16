@@ -78,7 +78,7 @@
                                                     "banana" | "plantain")
                                                     echo "Bananas provide instant energy."
                                              esac
-Task 3: Loops
+#Task 3: Loops
 1. for loop — list-based and C-style-
    for loops are used to iterate or list down the date from a list.
    list-for i in {1..5}
@@ -158,4 +158,106 @@ do
         echo "processing $username"
         sudo mkdir -p "/home/yogesh_jawlekar/script/day21/company/$department/$username"
 done < users.txt
+
+#Task 4: Functions
+1.Defining a function — function_name() { ... }
+Function can be defined with a parenthesis infront which carries the code or logic in curly brackets.
+e.g script
+function() {
+        echo "hello yogesh"
+}
+2.Calling a function-
+Once we have a function inorder to make it functional we need to call it calling is basically writing the function name just like in below example.
+new_function() {
+         echo "hello yogesh"
+}
+new_function
+3.Passing arguments to functions — $1, $2 inside functions
+In the below script we have called first argument if that first argument is the same as mentioned then this will perform the action
+In below script.
+e.g script
+new_function() {
+        if [ "$1"= "hi" ];then
+                echo "hello yogesh"
+        fi
+}
+new_function $1
+4.Return values — return vs echo
+return- return is basically use only inside a function where return 0 means sucess and return 1 means error return basically tells that if this is true or false then skip the function and operate if their are any operations other than that function 
+like in below script we have set a logic where if first argument is hi return 0 else echo new and their is another activity outside the function which is echo new world.
+so in here if we run the script with hi which is our first argument the return will stop the function there only and it will echo new world but if the first argument is not hi or other that hi it will perform else and also the outside operation.
+new_function() {
+        if [ "$1" = "hi" ];then
+                return 0
+        else
+                echo "new"
+        fi
+}
+new_function $1
+echo "new world"
+*note*
+exit1/0-can be used in whole of script.
+return1/0-can only be used inside of function.
+
+5.Local variables — local
+local variables are simply the variables which can only be used inside the function but for that before the variable name we need to assign keywork local then variable and its value.
+In below script if first argument is other than hi the logic will echo hello yogesh but outside the function there is also echo "$new" which will not work because there is no value assigned to it.
+e.g script
+new_function() {
+        local new="hello yogesh"
+        if [ "$1" = "hi" ];then
+                return 1
+        else
+                echo "$new"
+        fi
+}
+new_function $1
+echo "$new"
+
+#Task 5: Text Processing Commands
+1.grep — search patterns, -i, -r, -c, -n, -v, -E
+    -i = yogesh_jawlekar@Profound:~/script/day21$ grep -i "GREP" 1.log
+    This is a file which informs how to use grep with -i
+    grep -i is used to find the word by being insensitice to case.
+    -c = yogesh_jawlekar@Profound:~/script/day21$ grep -c "grep" 1.log
+      2
+      grep -c is used to count the number of that word like how many times that word has comeup in that file.
+2.awk
+In awk i feel the most usefull is the -F(capital F) which is a field seperator awk by default assumes that file is seprated by space but if suppose we have csv file we can assign this to let awk know that this file is sperated by comma.
+e.g awk -F "," '{print $1}' filename
+Patterns in awk:
+  searchin words 
+  awk -F "," '/erro/ {print $1}' filename
+  condition
+  awk -F "," '$2 == "HR" {print $1}
+  here it will only print coloumn $1 where in column $2 HR is their
+BEGIN and END
+Through this basically print at the start and at the end and in between we will print our data as per the belwo script.
+e.g
+awk -F ":" 'BEGIN {print "START"}
+        {print $1}
+     END {print "End of the report"}' names.txt
+3.sed — substitution, delete lines, in-place edit -sed is find and replace tool which works line-by-line
+  Substitution-is bascially denoted by s at the start 
+  sed 's/Pune/Mumbai/g' names.txt
+  In here sed asks to change pune with mumbai with s being seprator and g to check whole line to replace not just the first pune in that line.
+
+  delete lines:
+  In sed we can delete lines with their numbering or there patterns
+  sed '2d' names.txt
+  this will delete the second line.
+  sed '/error/' names.txt
+  this will delete those lines which have the word error in them.
+
+  In-place edit:
+  By default sed only changes the output keeping the actually file still the same if we use in-place edit which is denoted by -i that will change the file aswell.
+  e.g
+  sed -i 's/old/new/g' names.txt
+  this will change the whole file names.txt wherever in the file old is mentioned it will be replaced by new.
+
+
+4.cut — extract columns by delimiter we can use cut to extract speicific coloumns or specific range of coloumns from  a file
+cut -d ":" -f 2-4 names.txt
+In here -d is a delimitor which tells how to file is divided
+-f 2-4 or 1 or 1,2- This basically tell to cut that from range 2-4 we have to extract data or only one or one and two basically through this we can select which coloumns we have to extract.
 
