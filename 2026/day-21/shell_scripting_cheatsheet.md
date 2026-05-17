@@ -1,15 +1,15 @@
-   1 # Day 21 – Shell Scripting Cheat Sheet
-    2
-    3 ## Summary Table
-    4
-    5 | Category | Commands / Concepts |
-    6 | :--- | :--- |
-    7 | **Basics** | Shebang, Permissions, Comments, Variables, Input, Arguments |
-    8 | **Conditionals** | String/Integer comparisons, File tests, If/Else, Logical ops, Case |
-    9 | **Loops** | For, While, Until, Break, Continue, Iterating files/output |
-   10 | **Functions** | Defining, Calling, Passing arguments, Return vs Echo, Local variables |
-   11 | **Text Processing** | grep, awk, sed, cut, sort, tr, wc, head/tail |
-   12 | **Patterns** | File deletion, Error counting, String replace, Disk alerts, JSON/CSV parsing |
+# Day 21 – Shell Scripting Cheat Sheet
+
+## Summary Table
+
+| Category | Commands / Concepts |
+| :--- | :--- |
+| **Basics** | Shebang, Permissions, Comments, Variables, Input, Arguments |
+| **Conditionals** | String/Integer comparisons, File tests, If/Else, Logical ops, Case |
+| **Loops** | For, While, Until, Break, Continue, Iterating files/output |
+| **Functions** | Defining, Calling, Passing arguments, Return vs Echo, Local variables |
+| **Text Processing** | grep, awk, sed, cut, sort, tr, wc, head/tail |
+| **Patterns** | File deletion, Error counting, String replace, Disk alerts, JSON/CSV parsing |
    13 | **Error Handling** | set -e, set -u, set -o pipefail, set -x, Exit codes, Trap |
    14
    15 ---
@@ -262,27 +262,23 @@
    2 ### 5. JSON parsing with `jq`
   cat user.json | jq '.user'
   cat user.json | jq -r '.info.city'
-   1
-   2 ### 6. Tail a log in real-time
-  tail -f app.log | grep -i "error"
+### 6. Tail a log in real-time
+tail -f app.log | grep -i "error"
 
-    1
-    2 ---
-    3
-    4 ## Task 7: Error Handling and Debugging
-    5
-    6 ### 1. `set -e`, `-u`, `-o pipefail`
-    7 *   `-e`: Exit on any command failure.
-    8 *   `-u`: Error on unassigned variables.
-    9 *   `-o pipefail`: Catch errors inside pipes.
-   10
-   11 ### 2. `set -x` (Debug mode)
-   12 Prints every command with its variables expanded to the terminal.
+---
+ ## Task 7: Error Handling and Debugging
+
+### 1. `set -e`, `-u`, `-o pipefail`
+*   `-e`: Exit on any command failure.
+*   `-u`: Error on unassigned variables.
+*   `-o pipefail`: Catch errors inside pipes.
+### 2. `set -x` (Debug mode)
+Prints every command with its variables expanded to the terminal.
    + NAME=Yogesh
    + echo 'Hello Yogesh'
 
-   1
-   2 ### 3. Exit codes and Trap
-   3 *   `$?`: Status of last command (0=success).
-   4 *   `trap`: Automatically runs a cleanup function on exit.
+
+### 3. Exit codes and Trap
+*   `$?`: Status of last command (0=success).
+*   `trap`: Automatically runs a cleanup function on exit.
   trap cleanup EXIT
