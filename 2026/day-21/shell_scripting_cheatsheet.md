@@ -1,263 +1,288 @@
-#Day 21 – Shell Scripting Cheat Sheet: Build Your Own Reference Guide.
-  #Task 1-Basics
-  1.Shebang (#!/bin/bash) — Shebang should be used on the top of shell script so that the script could identify what type of shell we are using.
-  
-  2.Running a script chmod +x - In order to execute the shell script we first need to modify its permission to executable before running it can be done by using chmod +x script.sh.
-    e.g chmod +x backup.sh
-  
-  3.Comments — single line (#) and inline- In a script in order to explain or to define certain logics we can use comments which are used with # when we start the comment from the start of the line it is called full line comment and if in between
-  of the line it is called in-line comment.
-        e.g #This is a full line comment.
-            echo "comment" # this is inline comment.
-  There is also another type of comment which is called Multi-line comment which starts with delimeter followed by two redirection operators and and two same words whatever we will right in between those two words will be ignored by the script.
-        e.g :>>'comment'
-              this is a 
-              multiline.
-              comment
-  4.Variables — declaring, using, and quoting ($VAR, "$VAR", '$VAR')-In a script instead of hard-codding we assign the values to certain variables so that whenever if we want to change anything we can just change the values of those variables.
-              *declaring a avriable is basically assigning a value to a variable by using = operator.
-              e.g name=yogesh
-              *using and qouting- This means using the variable which was earlier declared inside our logic with quoting so that the output doesn't breaks.
-              e.g echo "$name"
-  5.Reading user input — read we can use read or read -p to take user input in simple terms we will take the user input using read and we can use that further in our logic.
-              e.g read -p "Enter your name:"name
-                    echo "my name is $name"
+   1 # Day 21 – Shell Scripting Cheat Sheet
+    2
+    3 ## Summary Table
+    4
+    5 | Category | Commands / Concepts |
+    6 | :--- | :--- |
+    7 | **Basics** | Shebang, Permissions, Comments, Variables, Input, Arguments |
+    8 | **Conditionals** | String/Integer comparisons, File tests, If/Else, Logical ops, Case |
+    9 | **Loops** | For, While, Until, Break, Continue, Iterating files/output |
+   10 | **Functions** | Defining, Calling, Passing arguments, Return vs Echo, Local variables |
+   11 | **Text Processing** | grep, awk, sed, cut, sort, tr, wc, head/tail |
+   12 | **Patterns** | File deletion, Error counting, String replace, Disk alerts, JSON/CSV parsing |
+   13 | **Error Handling** | set -e, set -u, set -o pipefail, set -x, Exit codes, Trap |
+   14
+   15 ---
+   16
+   17 ## Task 1: Basics
+   18
+   19 ### 1. Shebang (`#!/bin/bash`)
+   20 Used on the top of the script so the script can identify what type of shell we are using.
+  #!/bin/bash
 
-  6.Command-line arguments — $0, $1, $#, $@, Arguments can be easily defined as number of words in a command in linux in a shell script we can use arguments by assigning numbers like $1 $2 which basically will fetch or use the arguments which we will put 
-              while running the script for e.g ./script.sh sample.log (In this ./script.sh is argument $0 and sample.log $1).
-              Basically arguments are numbering or positioning of input given to the shell to execute.
-              e.g In a shell we have the following script:
-              if [ "$1" = "yogesh" ];then
-                    echo "Hello yogesh"
-              As in the above script we have an argument which is $1 means the input after the script name
-              so if we run our script ./script.sh yogesh
-            this will print Hello yogesh.
+   1
+   2 ### 2. Running a script (`chmod +x`)
+   3 Modify permission to executable before running.
+  chmod +x script.sh
+  ./script.sh
 
-  #Task 2: Operators and Conditionals:
+   1
+   2 ### 3. Comments (Single-line and Multi-line)
+   3 Single-line uses `#`. Multi-line uses a delimiter where everything between the two words is ignored.
+  This is a full-line comment
+  echo "comment" # This is an inline comment
 
-  1.String comparisons (=, !=, -z, -n)- String comparisons are used to verify if the string is same(=),different(!=),empty(-z) or not empty(-n).
-          	#!/bin/bash
-            if [ "$1" = "yogesh" ];then
-                    echo "Hello yogesh"
-  2.Integer comparisons (-eq, -ne, -lt, -gt, -le, -ge)- To compare the integers in our logic we can use integer comparison.
-            Suppose we have logic where if the total number of arguments are zero it should print something we will use this because we are dealing with integers.
-            e.g if [ $# -eq 0 ];then
-              echo "No arguments."
+  : << 'COMMENT'
+  this is a
+  multiline.
+  comment
+  COMMENT
 
-  3.File test operators (-f, -d, -e, -r, -w, -x, -s)-This operators are used for the operations related to files or directories for eg -f denotes is it a regular file,-d is it a directory,-e represents is the file exist at all.
-             e.g if [ -f "script.sh" ];then
-                      echo "File exists"
-                  fi
-                This basically uses -f to check wether it is a regular file or not.
+   1
+   2 ### 4. Variables (Declaring, Using, and Quoting)
+   3 Instead of hard-coding, we assign values to variables using the `=` operator. Use `$VAR` or `"$VAR"` to use them.
+  name=yogesh
+  echo "$name"
 
-  4.if, elif, else syntax- If else is used to put certain conditions and if those conditions are fullfilled certain activites should be carried out.
-              the synatx of if else is below
-                  if [ ou logic ];then
-                        echo "echo or whetever activity we want to carry out"
-                  else
-                  elif
-                  fi
+   1
+   2 ### 5. Reading user input (`read`)
+   3 We take user input using `read` or `read -p` and use that further in our logic.
+  read -p "Enter your name: " name
+  echo "my name is $name"
 
-  5.Logical operators (&&, ||, !)-&&= if this is used in between two commands if the first commands succeeds then second command will run.
-                                    e.g mkdir new-project && cd new-project
-                                  ||= If the first command fails means there is no output then only the second command will run.
-                                    e.g grep "error" file.log || echo "no error"
-                                  != This basically reverted the exit status success into failure and failuer into success.
-                                    e.g if [ ! -f "file.log ];then
-                                                echo "File doesn't exist"
-                                      usually -f searched for the regular file but ! infront of it even if the file exist it will revert the result.
-  6.Case statements — case ... esac-this is basically like using if else condition multiple times in here we can use the variable against multiple patterns.
-                                        e.g#!/bin
-                                            echo "Enter your favourite fruit:"
-                                             read fruit
-                                            
-                                             case "$fruit" in
-                                                      "apple")
-                                                    echo "Apples are great for health."
-                                                    ;;
-                                                    "banana" | "plantain")
-                                                    echo "Bananas provide instant energy."
-                                             esac
-#Task 3: Loops
-1. for loop — list-based and C-style-
-   for loops are used to iterate or list down the date from a list.
-   list-for i in {1..5}
-   do
-         echo $i
-   done
-  
-   c-style- is used for arithmetic type logics
-   for (( num=1 ; num<=10 ; num ++ ))
-   do
-            echo $num
-   done
+   1
+   2 ### 6. Command-line arguments (`$0`, `$1`, `$#`, `$@`)
+   3 Fetching or using inputs provided while running the script. `$0` is the script, `$1` is the first input.
+  Example: ./script.sh yogesh
+  if [ "$1" = "yogesh" ]; then
+      echo "Hello yogesh"
+  fi
 
-2. while loop- this is basically a true loop if the logic is true then the command will keep iterating until we stop it.
-read -p "enter your number:" number
+   1
+   2 ---
+   3
+   4 ## Task 2: Operators and Conditionals
+   5
+   6 ### 1. String comparisons (`=`, `!=`, `-z`, `-n`)
+   7 Used to verify if the string is same (`=`), different (`!=`), empty (`-z`), or not empty (`-n`).
+  if [ "$1" = "yogesh" ]; then
+      echo "Hello yogesh"
+  fi
 
-while [ "$number" -gt 10 ]
-do
+   1
+   2 ### 2. Integer comparisons (`-eq`, `-ne`, `-lt`, `-gt`, `-le`, `-ge`)
+   3 Used to compare integers in our logic, such as checking if total arguments are zero.
+  if [ $# -eq 0 ]; then
+      echo "No arguments."
+  fi
 
-        echo "Greater"
-        exit 1
-done
-echo "less"
+   1
+   2 ### 3. File test operators (`-f`, `-d`, `-e`, `-r`, `-w`, `-x`, `-s`)
+   3 Used for operations related to files or directories (e.g., `-f` for regular file, `-d` for directory).
+  if [ -f "script.sh" ]; then
+      echo "File exists"
+  fi
 
-3.Until loop- This is opposite to the while loop it basically false loop it says until this logic is true do this and done infinetly till we stop it.
-read -p "enter your number:" number
+   1
+   2 ### 4. `if`, `elif`, `else` syntax
+   3 Used to put certain conditions; if fulfilled, certain activities are carried out.
+  if [ condition ]; then
+      echo "activity"
+  else
+      echo "other activity"
+  fi
 
-until  [ "$number" -gt 10 ]
-do
+   1
+   2 ### 5. Logical operators (`&&`, `||`, `!`)
+   3 `&&`: second command runs if first succeeds. `||`: second runs if first fails. `!`: Reverts the exit status.
+  mkdir new-project && cd new-project
+  grep "error" file.log || echo "no error"
+  if [ ! -f "file.log" ]; then echo "File doesn't exist"; fi
 
-        echo "less"
-        exit 1
-done
-echo "greater"
+   1
+   2 ### 6. Case statements (`case ... esac`)
+   3 Used against multiple patterns instead of multiple if-else conditions.
+  case "$fruit" in
+      "apple") echo "Apples are great for health." ;;
+      "banana" | "plantain") echo "Bananas provide instant energy." ;;
+  esac
 
+   1
+   2 ---
+   3
+   4 ## Task 3: Loops
+   5
+   6 ### 1. `for` loop (List-based and C-style)
+   7 Used to iterate or list down data from a list or perform arithmetic logic.
+  List-based
+  for i in {1..5}; do echo $i; done
 
-4.Loop control — break, continue
-break- In shell scripting break acts as a stop button which gets triggered when the condition is fullfilled just like in below script if you see if the number is greater than 10 it will stop the infinty loop of greater but will also continue to run the next command which is to print less it doesnot stop overall script just the particular condition.
-e.g
-#!/bin/bash
+  C-style
+  for (( num=1 ; num<=10 ; num++ )); do echo $num; done
 
-read -p "enter your number:" number
+   1
+   2 ### 2. `while` loop
+   3 A "true" loop; if the logic is true, it keeps iterating until stopped.
+  while [ "$number" -gt 10 ]; do
+      echo "Greater"
+      exit 1
+  done
 
-        while [ "$number" -gt 10 ]
-        do
-                echo "greater"
-                break
-        done
-echo "less"
+   1
+   2 ### 3. `until` loop
+   3 Opposite to while; a "false" loop that runs until the logic becomes true.
+  until [ "$number" -gt 10 ]; do
+      echo "less"
+      exit 1
+  done
 
-continue:This basically skips whichever condition we set from to final output just like in below example we are iterating numbers from 1-5 but there is condition if i is 4 skip it so the output will only give us numbers other than 4.
-e.g
-#!/bin/bash
-for i in {1..5}
-do
-        if [ $i = 4 ];then
-                continue
-        fi
-        echo $i
-done
+   1
+   2 ### 4. Loop control (`break`, `continue`)
+   3 `break` stops the loop once triggered. `continue` skips the specific condition but finishes the loop.
+  for i in {1..5}; do
+      if [ $i = 4 ]; then continue; fi # Skips 4
+      echo $i
+  done
+   1
+   2 ### 5. Looping over files
+   3 Iterates over whatever file type is mentioned after the asterisk.
+  for file in *.log; do
+      echo $file
+  done
 
-5.Looping over files- to list down the files we can use belwo script where whetever file type we have mentioned after asteric it will iterate those files just like in below script the output was all the .log files were listed.
-e.g
-Script-
- for file in *.log
- do
-         echo $file
- done
+   1
+   2 ### 6. Looping over command output (`while read line`)
+   3 Lets us read data inside a file one line at a time to run commands.
+  while IFS=":" read -r username department; do
+      echo "processing $username"
+      sudo mkdir -p "./company/$department/$username"
+  done < users.txt
 
-5.Looping over command output — while read line
-while read line lets as read the data inside the file and also we can run commands using the data inside the file.
-for eg we have a file with usernames and departments we want to make directories of those usernames we will use whil read line which we read the data each line at time and will do mkdir on those line.
-e.g
-Script-
-while IFS=":" read -r username department
-do
-        echo "processing $username"
-        sudo mkdir -p "/home/yogesh_jawlekar/script/day21/company/$department/$username"
-done < users.txt
+   1
+   2 ---
+   3
+   4 ## Task 4: Functions
+   5
+   6 ### 1. Defining and Calling a function
+   7 Groups logic in curly brackets. Call it simply by writing its name.
+  new_function() {
+      echo "hello yogesh"
+  }
+  new_function # Calling the function
 
-#Task 4: Functions
-1.Defining a function — function_name() { ... }
-Function can be defined with a parenthesis infront which carries the code or logic in curly brackets.
-e.g script
-function() {
-        echo "hello yogesh"
-}
-2.Calling a function-
-Once we have a function inorder to make it functional we need to call it calling is basically writing the function name just like in below example.
-new_function() {
-         echo "hello yogesh"
-}
-new_function
-3.Passing arguments to functions — $1, $2 inside functions
-In the below script we have called first argument if that first argument is the same as mentioned then this will perform the action
-In below script.
-e.g script
-new_function() {
-        if [ "$1"= "hi" ];then
-                echo "hello yogesh"
-        fi
-}
-new_function $1
-4.Return values — return vs echo
-return- return is basically use only inside a function where return 0 means sucess and return 1 means error return basically tells that if this is true or false then skip the function and operate if their are any operations other than that function 
-like in below script we have set a logic where if first argument is hi return 0 else echo new and their is another activity outside the function which is echo new world.
-so in here if we run the script with hi which is our first argument the return will stop the function there only and it will echo new world but if the first argument is not hi or other that hi it will perform else and also the outside operation.
-new_function() {
-        if [ "$1" = "hi" ];then
-                return 0
-        else
-                echo "new"
-        fi
-}
-new_function $1
-echo "new world"
-*note*
-exit1/0-can be used in whole of script.
-return1/0-can only be used inside of function.
+   1
+   2 ### 2. Passing arguments and Return values
+   3 Functions use `$1`, `$2` internally. `return` is for success/error codes inside functions.
+  new_function() {
+      if [ "$1" = "hi" ]; then
+          return 0 # Success status
+      else
+          echo "new"
+      fi
+  }
 
-5.Local variables — local
-local variables are simply the variables which can only be used inside the function but for that before the variable name we need to assign keywork local then variable and its value.
-In below script if first argument is other than hi the logic will echo hello yogesh but outside the function there is also echo "$new" which will not work because there is no value assigned to it.
-e.g script
-new_function() {
-        local new="hello yogesh"
-        if [ "$1" = "hi" ];then
-                return 1
-        else
-                echo "$new"
-        fi
-}
-new_function $1
-echo "$new"
+   1
+   2 ### 3. Local variables (`local`)
+   3 Variables that can only be used inside the function they are defined in.
+  new_function() {
+      local new="hello yogesh"
+      echo "$new"
+  }
 
-#Task 5: Text Processing Commands
-1.grep — search patterns, -i, -r, -c, -n, -v, -E
-    -i = yogesh_jawlekar@Profound:~/script/day21$ grep -i "GREP" 1.log
-    This is a file which informs how to use grep with -i
-    grep -i is used to find the word by being insensitice to case.
-    -c = yogesh_jawlekar@Profound:~/script/day21$ grep -c "grep" 1.log
-      2
-      grep -c is used to count the number of that word like how many times that word has comeup in that file.
-2.awk
-In awk i feel the most usefull is the -F(capital F) which is a field seperator awk by default assumes that file is seprated by space but if suppose we have csv file we can assign this to let awk know that this file is sperated by comma.
-e.g awk -F "," '{print $1}' filename
-Patterns in awk:
-  searchin words 
-  awk -F "," '/erro/ {print $1}' filename
-  condition
-  awk -F "," '$2 == "HR" {print $1}
-  here it will only print coloumn $1 where in column $2 HR is their
-BEGIN and END
-Through this basically print at the start and at the end and in between we will print our data as per the belwo script.
-e.g
-awk -F ":" 'BEGIN {print "START"}
-        {print $1}
-     END {print "End of the report"}' names.txt
-3.sed — substitution, delete lines, in-place edit -sed is find and replace tool which works line-by-line
-  Substitution-is bascially denoted by s at the start 
+   1
+   2 ---
+   3
+   4 ## Task 5: Text Processing
+   5
+   6 ### 1. `grep`
+   7 Search patterns with `-i` (case insensitive), `-c` (count), `-v` (invert), etc.
+  grep -i "GREP" 1.log
+  grep -c "grep" 1.log
+
+   1
+   2 ### 2. `awk`
+   3 Useful for column separation using `-F`. Supports `BEGIN` and `END` patterns.
+  awk -F ":" 'BEGIN {print "START"} {print $1} END {print "End"}' names.txt
+
+   1
+   2 ### 3. `sed`
+   3 Find and replace tool that works line-by-line. Use `-i` for in-place edits.
   sed 's/Pune/Mumbai/g' names.txt
-  In here sed asks to change pune with mumbai with s being seprator and g to check whole line to replace not just the first pune in that line.
-
-  delete lines:
-  In sed we can delete lines with their numbering or there patterns
-  sed '2d' names.txt
-  this will delete the second line.
-  sed '/error/' names.txt
-  this will delete those lines which have the word error in them.
-
-  In-place edit:
-  By default sed only changes the output keeping the actually file still the same if we use in-place edit which is denoted by -i that will change the file aswell.
-  e.g
   sed -i 's/old/new/g' names.txt
-  this will change the whole file names.txt wherever in the file old is mentioned it will be replaced by new.
 
+   1
+   2 ### 4. `cut`
+   3 Extracts specific columns using a delimiter (`-d`) and field (`-f`).
+  cut -d ":" -f 2-4 names.txt
 
-4.cut — extract columns by delimiter we can use cut to extract speicific coloumns or specific range of coloumns from  a file
-cut -d ":" -f 2-4 names.txt
-In here -d is a delimitor which tells how to file is divided
--f 2-4 or 1 or 1,2- This basically tell to cut that from range 2-4 we have to extract data or only one or one and two basically through this we can select which coloumns we have to extract.
+   1
+   2 ### 5. `sort`
+   3 Sorts data alphabetically (`-d`), numerically (`-n`), or reverse (`-r`). `-u` gives unique lines.
+  sort -r names.txt # Reverse alphabetical (Z-A)
+  sort -u fruits.txt # Unique items only
 
+   1
+   2 ### 6. `tr` (Translate)
+   3 Used to translate or delete characters. It maps characters in set1 to set2.
+   4 **Your Mapping Example:** `tr 'yogesh' 'sourav'`
+   5 *   `y` → `s`, `o` → `o`, `g` → `u`, `e` → `r`, `s` → `a`, `h` → `v`
+  cat names.txt | tr 'yogesh' 'sourav'
+  cat names.txt | tr -d ':' # Deletes all colons
+
+   1
+   2 ### 7. `wc` (Word Count)
+   3 Counts lines (`-l`), words (`-w`), and characters.
+  wc -l names.txt
+  cat names.txt | tr ":" " " | wc -w # Use tr to help wc see words
+
+   1
+   2 ---
+   3
+   4 ## Task 6: Patterns and One-Liners
+   5
+   6 ### 1. Find and delete files older than 30 days
+  find "$source" -name "*.gz" -type f -mtime +30 -exec rm -f {} +
+
+   1
+   2 ### 2. Count lines in all `.log` files
+  total_errors=$(grep -oh "ERROR" *.log | wc -l)
+   1
+   2 ### 3. Replace a string across multiple files
+  sed -i 's/old/new/g' *.{log,txt,conf}
+
+   1
+   2 ### 4. Monitor disk usage with alerts
+  THRESHOLD=90
+  usage=$(df -h / | grep / | awk '{ print $5 }' | sed 's/%//')
+  if [ "$usage" -gt "$THRESHOLD" ]; then
+      echo "ALERT: Disk at ${usage}%"
+  fi
+
+   1
+   2 ### 5. JSON parsing with `jq`
+  cat user.json | jq '.user'
+  cat user.json | jq -r '.info.city'
+   1
+   2 ### 6. Tail a log in real-time
+  tail -f app.log | grep -i "error"
+
+    1
+    2 ---
+    3
+    4 ## Task 7: Error Handling and Debugging
+    5
+    6 ### 1. `set -e`, `-u`, `-o pipefail`
+    7 *   `-e`: Exit on any command failure.
+    8 *   `-u`: Error on unassigned variables.
+    9 *   `-o pipefail`: Catch errors inside pipes.
+   10
+   11 ### 2. `set -x` (Debug mode)
+   12 Prints every command with its variables expanded to the terminal.
+   + NAME=Yogesh
+   + echo 'Hello Yogesh'
+
+   1
+   2 ### 3. Exit codes and Trap
+   3 *   `$?`: Status of last command (0=success).
+   4 *   `trap`: Automatically runs a cleanup function on exit.
+  trap cleanup EXIT
