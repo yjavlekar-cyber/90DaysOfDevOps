@@ -10,25 +10,25 @@
 | **Functions** | Defining, Calling, Passing arguments, Return vs Echo, Local variables |
 | **Text Processing** | grep, awk, sed, cut, sort, tr, wc, head/tail |
 | **Patterns** | File deletion, Error counting, String replace, Disk alerts, JSON/CSV parsing |
-   13 | **Error Handling** | set -e, set -u, set -o pipefail, set -x, Exit codes, Trap |
-   14
-   15 ---
-   16
-   17 ## Task 1: Basics
-   18
-   19 ### 1. Shebang (`#!/bin/bash`)
-   20 Used on the top of the script so the script can identify what type of shell we are using.
-  #!/bin/bash
+| **Error Handling** | set -e, set -u, set -o pipefail, set -x, Exit codes, Trap |
 
-   1
-   2 ### 2. Running a script (`chmod +x`)
-   3 Modify permission to executable before running.
+---
+
+## Task 1: Basics
+
+### 1. Shebang (`#!/bin/bash`)
+Used on the top of the script so the script can identify what type of shell we are using.
+#!/bin/bash
+
+
+### 2. Running a script (`chmod +x`)
+Modify permission to executable before running.
   chmod +x script.sh
   ./script.sh
 
-   1
-   2 ### 3. Comments (Single-line and Multi-line)
-   3 Single-line uses `#`. Multi-line uses a delimiter where everything between the two words is ignored.
+
+### 3. Comments (Single-line and Multi-line)
+Single-line uses `#`. Multi-line uses a delimiter where everything between the two words is ignored.
   This is a full-line comment
   echo "comment" # This is an inline comment
 
@@ -38,54 +38,54 @@
   comment
   COMMENT
 
-   1
-   2 ### 4. Variables (Declaring, Using, and Quoting)
-   3 Instead of hard-coding, we assign values to variables using the `=` operator. Use `$VAR` or `"$VAR"` to use them.
+
+### 4. Variables (Declaring, Using, and Quoting)
+Instead of hard-coding, we assign values to variables using the `=` operator. Use `$VAR` or `"$VAR"` to use them.
   name=yogesh
   echo "$name"
 
-   1
-   2 ### 5. Reading user input (`read`)
-   3 We take user input using `read` or `read -p` and use that further in our logic.
+
+### 5. Reading user input (`read`)
+We take user input using `read` or `read -p` and use that further in our logic.
   read -p "Enter your name: " name
   echo "my name is $name"
 
-   1
-   2 ### 6. Command-line arguments (`$0`, `$1`, `$#`, `$@`)
-   3 Fetching or using inputs provided while running the script. `$0` is the script, `$1` is the first input.
+
+### 6. Command-line arguments (`$0`, `$1`, `$#`, `$@`)
+Fetching or using inputs provided while running the script. `$0` is the script, `$1` is the first input.
   Example: ./script.sh yogesh
   if [ "$1" = "yogesh" ]; then
       echo "Hello yogesh"
   fi
 
-   1
-   2 ---
-   3
-   4 ## Task 2: Operators and Conditionals
-   5
-   6 ### 1. String comparisons (`=`, `!=`, `-z`, `-n`)
-   7 Used to verify if the string is same (`=`), different (`!=`), empty (`-z`), or not empty (`-n`).
+
+ ---
+
+## Task 2: Operators and Conditionals
+   
+### 1. String comparisons (`=`, `!=`, `-z`, `-n`)
+Used to verify if the string is same (`=`), different (`!=`), empty (`-z`), or not empty (`-n`).
   if [ "$1" = "yogesh" ]; then
       echo "Hello yogesh"
   fi
 
-   1
-   2 ### 2. Integer comparisons (`-eq`, `-ne`, `-lt`, `-gt`, `-le`, `-ge`)
-   3 Used to compare integers in our logic, such as checking if total arguments are zero.
+
+### 2. Integer comparisons (`-eq`, `-ne`, `-lt`, `-gt`, `-le`, `-ge`)
+Used to compare integers in our logic, such as checking if total arguments are zero.
   if [ $# -eq 0 ]; then
       echo "No arguments."
   fi
 
-   1
-   2 ### 3. File test operators (`-f`, `-d`, `-e`, `-r`, `-w`, `-x`, `-s`)
-   3 Used for operations related to files or directories (e.g., `-f` for regular file, `-d` for directory).
+
+### 3. File test operators (`-f`, `-d`, `-e`, `-r`, `-w`, `-x`, `-s`)
+Used for operations related to files or directories (e.g., `-f` for regular file, `-d` for directory).
   if [ -f "script.sh" ]; then
       echo "File exists"
   fi
 
-   1
-   2 ### 4. `if`, `elif`, `else` syntax
-   3 Used to put certain conditions; if fulfilled, certain activities are carried out.
+
+### 4. `if`, `elif`, `else` syntax
+Used to put certain conditions; if fulfilled, certain activities are carried out.
   if [ condition ]; then
       echo "activity"
   else
@@ -93,8 +93,8 @@
   fi
 
    1
-   2 ### 5. Logical operators (`&&`, `||`, `!`)
-   3 `&&`: second command runs if first succeeds. `||`: second runs if first fails. `!`: Reverts the exit status.
+### 5. Logical operators (`&&`, `||`, `!`)
+`&&`: second command runs if first succeeds. `||`: second runs if first fails. `!`: Reverts the exit status.
   mkdir new-project && cd new-project
   grep "error" file.log || echo "no error"
   if [ ! -f "file.log" ]; then echo "File doesn't exist"; fi
