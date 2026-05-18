@@ -1,5 +1,5 @@
-#Task 1: Git Merge — Hands-On
-##1.Create a new branch feature-login from main, add a couple of commits to it.
+# Task 1: Git Merge — Hands-On
+## 1.Create a new branch feature-login from main, add a couple of commits to it.
 -yogesh_jawlekar@Profound:~/script/day22/devops-git-practice$ git branch feature-login
 - yogesh_jawlekar@Profound:~/script/day22/devops-git-practice$ git branch
     feature-1
