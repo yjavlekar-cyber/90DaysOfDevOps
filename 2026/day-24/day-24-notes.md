@@ -32,9 +32,27 @@
    * Fast-Forward: History looks like a single lane road.
    * Merge Commit: History looks like a highway junction where two roads join together.
 
-Now create another branch feature-signup, add commits to it — but also add a commit to main before merging
-Merge feature-signup into main — what happens this time?
-Answer in your notes:
-What is a fast-forward merge?
-When does Git create a merge commit instead?
-What is a merge conflict? (try creating one intentionally by editing the same line in both branches)
+## 3.Now create another branch feature-signup, add commits to it — but also add a commit to main before merging
+- git branch feature-signup
+- git commit -m "In signup branch"
+- git switch main
+- git commit -m "In main branch"
+
+  
+## 4.Merge feature-signup into main — what happens this time?
+-   git merge feature-signup(in main branch)
+-   Now we can see our earlier commits of main branch then commits of our feature-login then commits of feature-signup and again commits done on main branch.
+
+  
+## Answer in your notes:
+### 1.What is a fast-forward merge?
+    - Fast-forward is the kind of merge which create a linear commit history.
+    
+### 2.When does Git create a merge commit instead?
+    - when we use git merge main --no ff this manual way.
+    - suppose we are in feature branch and we want to merge in the merge into main branch but our main branch has moved forward with its own commit history in that case fast forward is not possible.
+    
+### 3.What is a merge conflict? (try creating one intentionally by editing the same line in both branches)
+    - merge conflict is basically same change has been conducted by main branch and feature branch and when we try to merge them both same changes collide which creates merge conflict.
+
+    
