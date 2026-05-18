@@ -14,15 +14,15 @@
    git-commands.md | 2 ++
    1 file changed, 2 insertions(+)
 - yogesh_jawlekar@Profound:~/script/day22/devops-git-practice$ git log
-  commit 1c040dae00e76e513ea7d2a8047b74919c339fbd (HEAD -> main, feature-login)
-  Author: Yogesh Jawlekar <yjawlekar@gmel.com>
-  Date:   Mon May 18 16:01:00 2026 +0000
+    * commit 1c040dae00e76e513ea7d2a8047b74919c339fbd (HEAD -> main, feature-login)
+    Author: Yogesh Jawlekar <yjawlekar@gmel.com>
+    Date:   Mon May 18 16:01:00 2026 +0000
   
       merge 2
   
-  commit bd8fddbc8d4d3b894ab482f36cfbfc58eada461f
-  Author: Yogesh Jawlekar <yjawlekar@gmel.com>
-  Date:   Mon May 18 15:59:44 2026 +0000
+    * commit bd8fddbc8d4d3b894ab482f36cfbfc58eada461f
+    Author: Yogesh Jawlekar <yjawlekar@gmel.com>
+    Date:   Mon May 18 15:59:44 2026 +0000
   
       merge 1
 ## 2.Observe the merge — did Git do a fast-forward merge or a merge commit?
