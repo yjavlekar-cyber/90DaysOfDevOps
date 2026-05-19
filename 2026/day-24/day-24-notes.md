@@ -118,7 +118,7 @@
 ### 2.Now imagine you need to urgently switch to another branch — try switching. What happens?
     Before commiting if i am doing the branch switch it is informing that local files in that branch will be overwritten it asking ton either add and commit or stash the changes.
 ### 3.Use git stash to save your work-in-progress
-  Done and It gave this: Saved working directory and index state WIP on profile: 8428c47 to confirm.
+    Done and It gave this: Saved working directory and index state WIP on profile: 8428c47 to confirm.
 ### 4.Switch to another branch, do some work, switch back
     Did few commits in another branch.
     
@@ -141,4 +141,6 @@
     
 #### 2.When would you use stash in a real-world workflow?
     In a real-world workflow if suppose i am in a branch doing something in a file if in any urgency i have to switch to a branch without commiting those changes i will use git stash which will stash my changes into a stash list which will be hiddem until i do git stash pop.
-    
+
+## Task 5: Cherry Picking
+
