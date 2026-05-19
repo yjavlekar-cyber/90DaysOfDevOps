@@ -76,12 +76,15 @@
 ### 5.Answer in your notes:
 #### What does rebase actually do to your commits?
       Rebase puts the commit history from current branch at the top.
-    - How is the history different from a merge?
+#### How is the history different from a merge?
       When we do merge the history is basically as per the time but as i said rebase puts current branches history at the top and then other branches.
       
-    - Why should you never rebase commits that have been pushed and shared with others?
+#### Why should you never rebase commits that have been pushed and shared with others?
       You should never rebase shared commits because it rewrites the commit IDs. If others have already started working on those commits, your rebase will force them to manually fix their entire history,
       causing major confusion and potential code loss.
       And whenever we rebase and get the commits on top using rebase the old ids of those commits gets deleted and new ones are generated which are now at the top.
       
-When would you use rebase vs merge?
+#### When would you use rebase vs merge?
+        I will use merge to view the linear history of the commits with the specific timelines but in rebase basically what happens if there is a feature branch where we have done small small changes or any other changes which are not neccesary and all are commited 
+        by doing rebase we will get them at the top and squash that into a single commit so that only finished commit we will be able to see.
+        
