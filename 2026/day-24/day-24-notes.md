@@ -87,4 +87,29 @@
 #### When would you use rebase vs merge?
         I will use merge to view the linear history of the commits with the specific timelines but in rebase basically what happens if there is a feature branch where we have done small small changes or any other changes which are not neccesary and all are commited 
         by doing rebase we will get them at the top and squash that into a single commit so that only finished commit we will be able to see.
+
+## Task 3: Squash Commit vs Merge Commit
+### 1.Create a branch feature-profile, add 4-5 small commits (typo fix, formatting, etc.)
+    - created and switched to branch using git checkout -b feature-profile and then edited the git commands file and added two commits to it.
+### 2.Merge it into main using --squash — what happens?
+        merged it into main using git merge main --squash
+### 3.Check git log — how many commits were added to main?
+     as checked no commits were directly added to main after doing merge squash we had to do git add and commit to name the squashed commit.
+     
+### 4.Now create another branch feature-settings, add a few commits
+        Done
         
+### 5.Merge it into main without --squash (regular merge) — compare the history
+    merged into main but unlike squash commits were directly added to the commit history of main.
+    
+### 6.Answer in your notes:
+#### 1.What does squash merging do?
+    when we squash merge one branches commit history into another it basically transforms all the commits into one single commit but it doesnt get directly added we have to first do git add and commit with a final message.
+    
+#### 2.When would you use squash merge vs regular merge?
+    I will use squash merge when i want to merge a branch into main but in that branch there too many unwanted commits which can be transformed into one single commit.
+    I would use reqular merge when the whole commit history with each and every commit is required to maintain i will opt for regular merge.
+#### 3.What is the trade-off of squashing?
+    git rebase -i     In normal squashing we squash all the commits but in trade off we only squash which are junk commits.
+
+    
