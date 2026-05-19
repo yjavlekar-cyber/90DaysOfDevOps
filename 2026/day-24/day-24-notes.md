@@ -112,4 +112,33 @@
 #### 3.What is the trade-off of squashing?
     git rebase -i     In normal squashing we squash all the commits but in trade off we only squash which are junk commits.
 
+## Task 4: Git Stash — Hands-On
+### 1.Start making changes to a file but do not commit
+      Done
+### 2.Now imagine you need to urgently switch to another branch — try switching. What happens?
+    Before commiting if i am doing the branch switch it is informing that local files in that branch will be overwritten it asking ton either add and commit or stash the changes.
+### 3.Use git stash to save your work-in-progress
+  Done and It gave this: Saved working directory and index state WIP on profile: 8428c47 to confirm.
+### 4.Switch to another branch, do some work, switch back
+    Did few commits in another branch.
+    
+### 5.Apply your stashed changes using git stash pop
+     So once switched back to branch where we had our stashed file if we do git status it will not show anything but we do git stash pop it will reflect the earlier file that we stashed i mean the changes that we stashed.
+     
+### 6.Try stashing multiple times and list all stashes
+    Did tried stashing 4 times each time with minor changes it saved every stash but when i did git stash pop it only poped the latest one.
+    
+### 7.Try applying a specific stash from the list
+    To get the list of all the stashed changes we need to do git stash list.
+    and also remember that this list works in LIFO method that means if the lastes is 0 than if we add one more the earlier will go to 1 and next to that will become 0.
+    to apply anyone we need to use below command
+    git stash apply stash@{0}
+    
+### Answer in your notes:
+#### 1.What is the difference between git stash pop and git stash apply?
+    - git stash pop- only gives us our last stashed change.
+    - git stash apply- On the other hand git stash apply allows us to choose from the list of our stashes to apply and the add and commit.
+    
+#### 2.When would you use stash in a real-world workflow?
+    In a real-world workflow if suppose i am in a branch doing something in a file if in any urgency i have to switch to a branch without commiting those changes i will use git stash which will stash my changes into a stash list which will be hiddem until i do git stash pop.
     
