@@ -143,4 +143,15 @@
     In a real-world workflow if suppose i am in a branch doing something in a file if in any urgency i have to switch to a branch without commiting those changes i will use git stash which will stash my changes into a stash list which will be hiddem until i do git stash pop.
 
 ## Task 5: Cherry Picking
-
+### 1.What does cherry-pick do?
+    Cherry pick allows us to choose or to pick anyone specific commits with their commit ID and merge it into a branch.
+    git cherry-pick commit id
+    And there is another point to remember if we are doing cherrypick of a commit whos commit id is 123 but when we do cherrypick and merges 123 in another branch the commit id changes and hash also.
+### 2.When would you use cherry-pick in a real project?
+    In a project where i will need only one commit from whole commit history to merge in an another branch in that case i will use cherry-pick.
+    In another case if we are in feature branch working on some fix and we found some critical bug there which we fix then and there and we want that bug fix in main we can do cherry-pick.
+    
+### 3.What can go wrong with cherry-picking?
+    while doing cherry picking merge conflicts can happen that we have to resolve sometime we only choose only four characters from the commit id that could also lead to error so to avoid this we can also try doing cherry pick with the whole commit id.
+    2.Also if there are twp commits commit a and commit b, commit is based on code which was commited in commit a and if we only cherry pick commit b that could cause problems becaues we do not have the foundation.
+    
