@@ -138,7 +138,8 @@ As of now I have learned the below topics in linux operating system and mentione
 
 
 
-Summary-
+# Summary
+
 I learned why linux is called the basic part of learning devops.
 Around 90% of the services run on linux operating system.
 Linux is available as GPL so anyone can modify it he/she just needs to share those change publicly.
