@@ -3,10 +3,12 @@
   ### uname -a
     => gives output that OS is linux host name then kernal version number etc details.
     
-    cat /etc/os-release has give me version specific details of the OS.
+  ### cat /etc/os-
+    release has give me version specific details of the OS.
 
 ## CPU
- ### top-mostly there is no cpu usage 99.9% cpu is idle
+ ### top-
+     mostly there is no cpu usage 99.9% cpu is idle
 
 ## Memory
  ### free -h
