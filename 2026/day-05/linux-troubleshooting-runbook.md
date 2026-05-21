@@ -21,7 +21,7 @@
 
 ## Networking
 
- ### ss tuln 
+ ### ss -tuln 
     - Tcp port 80 is listening hence conclusion nginx service is active.
     
  ### curl -i http://localhost
