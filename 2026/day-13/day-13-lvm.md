@@ -45,7 +45,6 @@
     After attaching this volumes the major part is to mount those to our storage.
     Today after attaching the volumes the first which i conducted was first converted those created volumes into physical volumes from out of those I created volume groups and then from them logical volume.
     Also did the process mounting this logical volumes to our mount location.
-    Tried my hands on extending the already created logical volume as well. generate an image on basis of this to post on linked in
-
+    Tried my hands on extending the already created logical volume as well. 
 
 
