@@ -26,9 +26,9 @@
       
       ==> and you can see when we did cat we can read the file.
 
-*note*
->-overwrites
->>-Appends
+      *note*
+      >-overwrites
+      >>-Appends
 
 ## Usage of head
       yogesh_jawlekar@Profound:/mnt/c/Users/yogesh jawlekar/projects$ head -2 notes.txt
