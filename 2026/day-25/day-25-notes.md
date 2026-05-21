@@ -22,3 +22,27 @@
 
 ### Should you ever use git reset on commits that are already pushed?
      No, because if someone has already started working on them commits they might face problem.
+## Task 2: Git Revert — Hands-On
+    Make 3 commits (commit X, Y, Z)
+    Revert commit Y (the middle one) — what happens?
+    Check git log — is commit Y still in the history?
+## Answer in your notes:
+### How is git revert different from git reset?
+    What git revert does is that it revertes the changes of that particular commit but in comit history/logs the original commit will still reflect but in addition
+    as head there will be a new commit saying commit reverted.
+    But in reset it deleted the commit also if we used mixed and hard it can change the file as well.
+    
+### Why is revert considered safer than reset for shared branches?
+    If we use reset in shared branches if on one commit we did reset it can create problems to others with whom we are sharing those branches 
+    the foundation of commits on which other people might be working might disapper because of reset.
+    But in revert the original commit is still their though the file is changed.
+    
+### When would you use revert vs reset?
+#### revert 
+    - we can use revert if we are not sure wether to delete or to keep the commit in that case we can revert because as and when if we have to again undo the revert that option is also available.
+    If the code is already pushed we can use revert because if someone has already pulled and started working and then we do revert it will not delete the commit it will just create a new commit to only hide that commit
+    which we are reverting but if someone is making change on the same commit which we reverted then there will merge conflict which can be resolved by the other person.
+    
+#### reset
+    - To delete any unwanted commits done or any unwanted changes we can use revert.
+    reset we should only use until the code is on only our laptop not pushed yet.
