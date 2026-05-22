@@ -61,8 +61,7 @@
 ### 1.GitFlow
 #### How it works
     Under this branching flow devlopers create a feature branch from main branch and delay merging back to the main branch until feature is finally finished.
-    Gitflow can be used for the projects which have specific release cycle.
-
+    
     In this with main branch there is another branch called devlop. main is basically the official release branch and devlop branch is the branch which will act
     as intermidiatery between feature branch and main branch.
     Once the features are done we can push those onto a devlop branch and from their we can push it to a new branch called "Release".
@@ -77,3 +76,23 @@
 | **Feature Branch** | Private workspace for new code. |
 | **Release Branch** | Final QA / Buffer before Production. |
 | **Hotfix Branch** | Fast-track for production bugs. |
+
+
+#### When/where it's used
+     * Scheduled Release Cycles: Best for projects that release on a fixed schedule (e.g., every 2 weeks or monthly) rather than continuously.
+     * Mobile App Development: Ideal for iOS/Android apps where releases must be "frozen" for App Store review while new development continues.
+     * Large-Scale Enterprise Projects: Used when multiple teams are working on different features simultaneously and need a stable develop branch to integrate their work.
+     * Strict QA Requirements: Perfect when a dedicated "Release" phase is needed for final bug hunting and polishing without stopping new feature development.
+     * Legacy Software: When maintaining older versions is necessary, as Gitflow makes tracking versions (tags) very clear.
+
+#### Pros and cons
+- PROS
+      - devlopment continues parallaly.
+      - Highly structured.
+      - Great for scheduled releases
+      - Stability as the main branch is secluded only used to merge releases and hotfixes.
+- CONS
+      - Structure can be complex sometimes.
+      - Can slow down small projects as this does not support continous delivery.
+      - Merge conflicts
+  
