@@ -55,3 +55,25 @@
 | Removes commit from history? | Yes | No, but hides it. |
 | Safe for shared/pushed branches? | NO | Yes |
 | When to use? | To delete any unwanted changes from our local. | If we are not sure about the changes we can revert when code is pushed. |
+
+
+## Task 4: Branching Strategies
+### 1.GitFlow
+#### How it works
+    Under this branching flow devlopers create a feature branch from main branch and delay merging back to the main branch until feature is finally finished.
+    Gitflow can be used for the projects which have specific release cycle.
+
+    In this with main branch there is another branch called devlop. main is basically the official release branch and devlop branch is the branch which will act
+    as intermidiatery between feature branch and main branch.
+    Once the features are done we can push those onto a devlop branch and from their we can push it to a new branch called "Release".
+    Using a dedicated branch to prepare releases makes it possible for one team to polish the current release while another team continues working on features for the next release.
+
+    Also there is an other branch called "Hotfix" which directly communicates with the main branch for bugfixes.
+
+| Workflow Component | Gitflow Strategy |
+| :--- | :--- |
+| **Main Branch** | Production releases only. |
+| **Develop Branch** | Main "hub" for integration. |
+| **Feature Branch** | Private workspace for new code. |
+| **Release Branch** | Final QA / Buffer before Production. |
+| **Hotfix Branch** | Fast-track for production bugs. |
