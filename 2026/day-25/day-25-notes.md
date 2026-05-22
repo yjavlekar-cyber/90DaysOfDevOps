@@ -51,5 +51,7 @@
 
 |          | git reset | git revert |
 | -------- | --------  | --------   |
-| Row 1, Col 1 | Row 1, Col 2 | Row 1, Col 3 |
-| Row 2, Col 1 | Row 2, Col 2 | Row 2, Col 3 |
+| What it does? | Can delete the commit history and file changes as well | Creates new commit which will gide the commit we are reverting |
+| Removes commit from history? | Yes | No, but hides it. |
+| Safe for shared/pushed branches? | NO | Yes |
+| When to use? | To delete any unwanted changes from our local. | If we are not sure about the changes we can revert when code is pushed. |
