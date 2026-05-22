@@ -86,13 +86,59 @@
      * Legacy Software: When maintaining older versions is necessary, as Gitflow makes tracking versions (tags) very clear.
 
 #### Pros and cons
+    - PROS
+          - devlopment continues parallaly.
+          - Highly structured.
+          - Great for scheduled releases
+          - Stability as the main branch is secluded only used to merge releases and hotfixes.
+    - CONS
+          - Structure can be complex sometimes.
+          - Can slow down small projects as this does not support continous delivery.
+          - Merge conflicts
+
+### GitHub Flow
+#### How it works
+        Github workflow is much simpler that gitflow because it is used for project which are daily updated.
+        In this there is main branch and a feature branch suppose some work is done we can create a pull request
+        on github which then will be review by our superior and then we can merge it to main branch and immediately deployed in production.
+
+#### A simple diagram or flow
+
+(MAIN BRANCH)
+[Always Production Ready]
+|
+|  (1. Create Branch)
+ +----------------------> [FEATURE BRANCH]
+|                           |
+|                           | (2. Make Commits)
+|                           |  - Commit 1
+|                           |  - Commit 2
+|                           |
+|  (3. Open Pull Request)   |
+|<--------------------------+
+|
+|  (4. Discussion & Review)
+|  [ Teammates check code ]
+|
+|  (5. Merge & Delete Branch)
+|<--------------------------+
+|
+(UPDATED MAIN)
+[ Automatically Deployed ]
+        
+#### When/where it's used
+    This is very simple as compared to git flow strategy also it provides continous integration and continuos delivery hence this strategy can be used where we require this and such 
+    projects where daily updates are required.
+
+#### Pros and cons
 - PROS
-      - devlopment continues parallaly.
-      - Highly structured.
-      - Great for scheduled releases
-      - Stability as the main branch is secluded only used to merge releases and hotfixes.
-- CONS
-      - Structure can be complex sometimes.
-      - Can slow down small projects as this does not support continous delivery.
-      - Merge conflicts
+  Less complez.
+  Continous integration/Continous delivery
+  Good for regular updates
+  good for small to meduim size projects.
+
+- Cons
+  Everyone directly merges into main it can create mess.
+  As there is no proper structure it cannot be suitable for large projects.
+  Only one version
   
