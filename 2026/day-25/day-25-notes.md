@@ -96,7 +96,7 @@
           - Can slow down small projects as this does not support continous delivery.
           - Merge conflicts
 
-### GitHub Flow
+### 2.GitHub Flow
 #### How it works
         Github workflow is much simpler that gitflow because it is used for project which are daily updated.
         In this there is main branch and a feature branch suppose some work is done we can create a pull request
@@ -141,4 +141,30 @@
   Everyone directly merges into main it can create mess.
   As there is no proper structure it cannot be suitable for large projects.
   Only one version
-  
+
+
+### 3.Trunk-Based Development
+
+#### How it works
+In this model there are no long lived branches instead of that we directly merge small commits into main branch 
+or we create a branch but once the purpose is fullfilled the branch is deleted immedietly.
+
+#### A simple diagram or flow
+Main   ---[M]---[M]---[M]---[M]---[M]---[M]-->
+          /    /     /     /     /     /
+     [Fix] [Task] [Task] [Edit] [Fix] [Task]
+
+
+#### When/where it's used
+1.Big companies- they have large team if everybody created branches it will be a mess hence we can use this where branches will last maximum for 1 day.
+
+It can also be used in such projects where code is always ready to go live.
+
+#### Pros and cons
+- PROS
+      No mess causing due the branches being in the system for three days.
+      Speedy process
+      No merge conflicts
+- Cons
+      Risky one bad commit can messup everything
+      Heavy automation
