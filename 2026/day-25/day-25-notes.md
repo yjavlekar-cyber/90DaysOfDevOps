@@ -46,3 +46,10 @@
 #### reset
     - To delete any unwanted commits done or any unwanted changes we can use revert.
     reset we should only use until the code is on only our laptop not pushed yet.
+
+## Reset vs Revert — Summary
+
+|          | git reset | git revert |
+| -------- | --------  | --------   |
+| Row 1, Col 1 | Row 1, Col 2 | Row 1, Col 3 |
+| Row 2, Col 1 | Row 2, Col 2 | Row 2, Col 3 |
