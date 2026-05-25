@@ -109,3 +109,18 @@
        1 gh repo delete yjavlekar-cyber/New_Repo
     
       It should work perfectly this time!
+
+## Task 3: Issues
+### 1.Create an issue on one of your repos from the terminal — give it a title, body, and a label
+    Issues in github basically means tickets created for bug change and new feature etc.
+    To create we can ran below command
+    gh issue create --title "Bug in login" --body "Login fails on invalid token"  
+    
+    --title - being the title of the issue and --body being the main matter of the issue.
+
+### 2.List all open issues on that repo
+    To list all the issues we can ran 
+    gh issue list  
+
+### 3.
+
