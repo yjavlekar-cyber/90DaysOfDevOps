@@ -122,5 +122,34 @@
     To list all the issues we can ran 
     gh issue list  
 
-### 3.
+### 3.View a specific issue by its number
+    To list the issue with its number 
+    gh issue view 1
+    
+    yogesh_jawlekar@Profound:~/script/day24$ gh issue view 1
+    Bug in login yjavlekar-cyber/New_Repo#1
+    Open • yjavlekar-cyber opened about 39 minutes ago • 0 comments
+    
+    
+      Login fails on invalid token
+    
+    
+    View this issue on GitHub: https://github.com/yjavlekar-cyber/New_Repo/issues/1
 
+    To opne the issue in web browser
+    gh issue view 1 --web4
+    This will directly open the issue on web browser.
+    
+### 4.Close an issue from the terminal
+    To close the issue 
+    gh issue close 1
+    yogesh_jawlekar@Profound:~/script/day24$ gh issue close 1
+    ✓ Closed issue yjavlekar-cyber/New_Repo#1 (Bug in login)
+    
+### 5.How could you use gh issue in a script or automation?
+    1.we can use issue in script where if the script fails issue shall be created automatically
+     ./run_tests.sh
+    if [ $? -ne 0 ]; then
+    echo "Tests failed! Creating an issue..."
+    gh issue create --title "Build Failure: $(date)" --body "The automated tests failed on the server. Please check the logs." --label "bug,automated-report"
+    fi
