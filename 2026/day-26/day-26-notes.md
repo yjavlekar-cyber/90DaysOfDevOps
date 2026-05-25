@@ -45,3 +45,67 @@
     for that to show on our CLI we need to clone it by using:
     gh repo clone <on github we will get a github CLI link that we have to use here>
 
+### 3.View details of one of your repos from the terminal
+    To view the details of our repo first we need to add the origin by using  git remote add origin https://github.com/yjavlekar-cyber/New_Repo.git
+    This only we have to do if we have said N to clone the repo locally while creating repo if yes then no issue.
+    Once done we can run gh repo view.
+    Which will give us result 
+    yogesh_jawlekar@Profound:~/script/day24$ gh repo view
+    yjavlekar-cyber/New_Repo
+    This is a new repo created to study Github CLI
+    
+    
+       New_Repo
+    
+      This is a new repo created to study Github CLI
+    
+    
+    
+    View this repository on GitHub: https://github.com/yjavlekar-cyber/New_Repo
+### 4.List all your repositories
+    For this we ran gh repo list
+    yogesh_jawlekar@Profound:~/script/day24$ gh repo list
+    
+    Showing 10 of 10 repositories in @yjavlekar-cyber
+    
+    NAME                                                            DESCRIPTION                                                                               INFO          UPDATED
+    yjavlekar-cyber/90DaysOfDevOps                                  This repository is a Challenge for the DevOps Community to get stronger in DevOps.The...  public, fork  about 9 minutes ago
+    yjavlekar-cyber/New_Repo                                        This is a new repo created to study Github CLI                                            public        about 23 minutes ago
+    yjavlekar-cyber/gitpractice                                     This is repo made while practicing git commands.                                          public        about 2 days ago
+    yjavlekar-cyber/Audio-analyzer                                                                                                                            public        about 16 days ago
+    yjavlekar-cyber/project-2-fastapi                               This is basic jenking API project.                                                        public        about 17 days ago
+    yjavlekar-cyber/Website                                         Deployment of website                                                                     public        about 18 days ago
+    yjavlekar-cyber/learning-github-actions                         from zero to hero                                                                         public        about 18 days ago
+    yjavlekar-cyber/system-health-monitor-                                                                                                                    public        about 20 days ago
+    yjavlekar-cyber/my-tickets-app                                                                                                                            public        about 1 month ago
+    yjavlekar-cyber/https-github.com-bregman-arie-devops-exercises                                                                                            public, fork  about 4 years ago
+
+### 5.Open a repo in your browser directly from the terminal
+    We can open repo on two ways:
+    1.gh repo view <link> Only to view.
+    2.gh repo clone <link> To start working
+
+### 6.Delete the test repo you created (be careful!)
+    To delete we can use gh repo delete <link>
+    This happened because deleting a repository is a "high-risk" action. By default, the GitHub CLI does not have permission to delete things, even if you are logged in. This protects you from accidentally
+      deleting a repo via a script or a typo.
+    
+      To fix this, you need to grant the CLI the delete_repo permission (scope).
+    
+      1. Run the Refresh Command
+      Copy and paste the exact command the error gave you:
+    
+       1 gh auth refresh -h github.com -s delete_repo
+    
+      2. What will happen:
+       * It will ask: ! First-party GitHub CLI GitHub App is already authorized. To add 'delete_repo' scope, we need to re-authorize.
+       * Press Enter to open your browser (or follow the code prompt if you are on a remote server).
+       * On the GitHub website, click "Authorize github".
+       * Your terminal will then say ✓ Authentication complete.
+    
+      3. Delete the Repo again
+      Now that you have the "keys" to delete, run your command again:
+    
+       1 gh repo delete yjavlekar-cyber/New_Repo
+    
+      It should work perfectly this time!
