@@ -153,3 +153,59 @@
     echo "Tests failed! Creating an issue..."
     gh issue create --title "Build Failure: $(date)" --body "The automated tests failed on the server. Please check the logs." --label "bug,automated-report"
     fi
+## Task 4: Pull Requests
+### 1.Create a branch, make a change, push it, and create a pull request entirely from the terminal
+    so first we have main branch where we have a read me file
+    we created a branch with git checkout -b feature
+    then made changes to it and added,commited the same.
+    Instead of pushing we directly created a pull request using below command:
+    gh pr create
+    This pull request when created from branch which is available on CLI will also lead to reflect the same branch on github.
+
+### 2.List all open PRs on a repo
+    Using gh pr list we can list our available pull requests.
+    
+### 3.View the details of your PR — check its status, reviewers, and checks
+    To check status of PR
+    gh pr status
+    
+    To view all the details we can use
+    gh pr view 2 --comments
+
+### 4.Merge your PR from the terminal
+    To merge the PR onto main
+    yogesh_jawlekar@Profound:~/script/day24/New_Repo$ gh pr merge 2
+    Merging pull request yjavlekar-cyber/New_Repo#2 (new)
+    ? What merge method would you like to use? Create a merge commit
+    ? Delete the branch locally and on GitHub? Yes
+    ? What's next? Submit
+    ✓ Merged pull request yjavlekar-cyber/New_Repo#2 (new)
+    remote: Enumerating objects: 1, done.
+    remote: Counting objects: 100% (1/1), done.
+    remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+    Unpacking objects: 100% (1/1), 878 bytes | 292.00 KiB/s, done.
+    From https://github.com/yjavlekar-cyber/New_Repo
+     * branch            main       -> FETCH_HEAD
+       46fb066..46ec292  main       -> origin/main
+    Updating 3ec09c4..46ec292
+    Fast-forward
+     README.md | 3 +++
+     1 file changed, 3 insertions(+)
+    ✓ Deleted local branch feature and switched to branch main
+    ✓ Deleted remote branch feature
+
+### 5.Answer in your notes:
+
+#### 1.What merge methods does gh pr merge support?
+    The below merge methods gh pr merge support
+    merge commit
+    rebase
+    squash
+
+#### 2.How would you review someone else's PR using gh?
+    To review someonne else's PR request we can use below commands with extension.
+    gh pr review 2 
+    which will ask us
+    whether to approve,request change or any comments.
+    Then, Body where we can type our feedback.
+
