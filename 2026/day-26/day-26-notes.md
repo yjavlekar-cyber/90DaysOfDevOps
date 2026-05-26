@@ -209,3 +209,83 @@
     whether to approve,request change or any comments.
     Then, Body where we can type our feedback.
 
+## Task 5: GitHub Actions & Workflows (Preview)
+Using below commands we can access any public repos workflow runs means that repos histroy of automation for CI/CD
+### 1.List the workflow runs on any public repo that uses GitHub Actions
+    yogesh_jawlekar@Profound:~/script/day24/New_Repo$ gh run list -R yjavlekar-cyber/Website
+    STATUS  TITLE                       WORKFLOW                BRANCH  EVENT    ID           ELAPSED  AGE
+    ✓       g                           New website             main    push     25431182919  25s      about 20 days ago
+    X       pages build and deployment  pages-build-deployment  main    dynamic  25431182114  28s      about 20 days ago
+    ✓       k                           New website             main    push     25430993185  32s      about 20 days ago
+    X       pages build and deployment  pages-build-deployment  main    dynamic  25430992786  28s      about 20 days ago
+    ✓       lo                          New website             main    push     25430680163  34s      about 20 days ago
+    X       pages build and deployment  pages-build-deployment  main    dynamic  25430679325  43s      about 20 days ago
+    ✓       M                           New website             main    push     25430396226  46s      about 20 days ago
+    X       pages build and deployment  pages-build-deployment  main    dynamic  25430395512  36s      about 20 days ago
+    X       l                           New website             main    push     25430214330  0s       about 20 days ago
+    X       pages build and deployment  pages-build-deployment  main    dynamic  25430213823  43s      about 20 days ago
+    X       m                           New website             main    push     25429924433  0s       about 20 days ago
+    X       pages build and deployment  pages-build-deployment  main    dynamic  25429924397  32s      about 20 days ago
+    X       newe                        New website             main    push     25429834082  0s       about 20 days ago
+    X       pages build and deployment  pages-build-deployment  main    dynamic  25429833943  39s      about 20 days ago
+    X       should wotk now             New website             main    push     25429770337  0s       about 20 days ago
+    X       pages build and deployment  pages-build-deployment  main    dynamic  25429770180  41s      about 20 days ago
+    X       n                           New website             main    push     25429368879  14s      about 20 days ago
+    X       changes                     New website             main    push     25429252108  14s      about 20 days ago
+    X       With new yml                New website             main    push     25429154936  0s       about 20 days ago
+    ✓       new                         New website             main    push     25423258011  32s      about 20 days ago
+    
+    
+    In this above example there was workflow automation i did 20days back by using below gh command we can list history of the same.
+    
+    gh run list -R owner/repo
+
+### 2.View the status of a specific workflow run
+    We can also indivdually check the status of specific workflow run 
+    lets suppose we want to check the status of ID 25431182919 we can run
+    
+    gh run view 25431182919 -R yjavlekar-cyber/Website
+    
+    This will give us all the details like what did it do.
+    
+    ✓ main New website · 25431182919
+    Triggered via push about 20 days ago
+    
+    JOBS
+    ✓ build-and-deploy in 20s (ID 74597551667)
+    
+    ANNOTATIONS
+    ! Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/deploy-pages@v4, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+    build-and-deploy: .github#4
+    
+    ! The process '/usr/bin/git' failed with exit code 128
+    build-and-deploy: .github#10
+    
+    
+    ARTIFACTS
+    github-pages (expired)
+    
+    For more information about the job, try: gh run view --job=74597551667
+    View this run on GitHub: https://github.com/yjavlekar-cyber/Website/actions/
+    
+
+### 3.How could gh run and gh workflow be useful in a CI/CD pipeline?
+    Using gh run we can keep track and check the status of automation.
+    * gh workflow run is the "Start" button (it triggers the action).
+    * gh run is the "Monitor" screen (it lets you watch and see the results).
+
+## Task 6: Useful gh Tricks
+### 1.gh api
+    whith help of this we can get data in json format from github onto our CLI.
+    some examples of the commands:
+    gh api user
+    gh api user/repos
+
+### 2.gh alias
+    We can use this command to create a shortcut which we frequently use
+    gh alias set list "pr list"
+    so even if we do gh list it will give use list of pull requests.
+
+### 3.gh search repos
+    This command can be used to search for sepcific patterns inside the mentioned repo
+     gh search code "Invalid token" --repo owner/big-project
