@@ -1,7 +1,7 @@
 # Day 28 – Revision Day: Everything from Day 1 to Day 27
 ## Task 1: Self-Assessment Checklist
 Linux
-[x] Navigate the file system, create/move/delete files and directories
+- [x] Navigate the file system, create/move/delete files and directories
 [x] Manage processes — list, kill, background/foreground
 [x] Work with systemd — start, stop, enable, check status of services
 [x] Read and edit text files using vi/vim or nano
