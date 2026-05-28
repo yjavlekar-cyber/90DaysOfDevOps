@@ -40,14 +40,14 @@
 
 
 ## Task 2: Revisit Your Weak Spots
-1) First thing i revisited was networking side where i revised tcp-ip model osi model how it works what protocols are active in which layer
-   then tried my hands on commands like ping,dig,ss -tuln,sudo netstat -tupln, traceroute etc.
-   
-3) Secondly did revisit my shell script cheat sheet gone through loops,if else,while loops,until loops other concepts like awk,sed,grep etc
-   Also visited error handling concepts set -euo pipefail and cronjobs.
-   
-3)In git major part i can recall but i had some difficulties remembering rebase and merge revisited that.
-    Also did revision on branching strategies.
+      1) First thing i revisited was networking side where i revised tcp-ip model osi model how it works what protocols are active in which layer
+         then tried my hands on commands like ping,dig,ss -tuln,sudo netstat -tupln, traceroute etc.
+         
+      3) Secondly did revisit my shell script cheat sheet gone through loops,if else,while loops,until loops other concepts like awk,sed,grep etc
+         Also visited error handling concepts set -euo pipefail and cronjobs.
+         
+      3)In git major part i can recall but i had some difficulties remembering rebase and merge revisited that.
+          Also did revision on branching strategies.
 
    
 
