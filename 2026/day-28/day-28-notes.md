@@ -12,7 +12,7 @@
 - [x] Change file ownership with chown and chgrp-Can do confidently
 - [x] Create and manage LVM volumes -Can do confidently
 - [x] Check network connectivity — ping, curl, netstat, ss, dig, nslookup -Need to revisit
-- [ ] Explain DNS resolution, IP addressing, subnets, and common ports -Need to revisit
+- [x] Explain DNS resolution, IP addressing, subnets, and common ports -Need to revisit
 
 ### Shell Scripting
 - [x] Write a script with variables, arguments, and user input -Can do confidently
@@ -28,15 +28,28 @@
 - [x] Create and switch branches -Can do confidently
 - [x] Push to and pull from GitHub -Can do confidently
 - [x] Explain clone vs fork -Can do confidently
-- [ ] Merge branches — understand fast-forward vs merge commit -Need to revisit
-- [ ] Rebase a branch and explain when to use it vs merge -Need to revisit
+- [x] Merge branches — understand fast-forward vs merge commit -Need to revisit
+- [x] Rebase a branch and explain when to use it vs merge -Need to revisit
 - [x] Use git stash and git stash pop -Can do confidently
 - [x] Cherry-pick a commit from another branch-Can do confidently
 - [x] Explain squash merge vs regular merge -Can do confidently
-- [ ] Use git reset (soft, mixed, hard) and git revert -Need to revisit
-- [ ] Explain GitFlow, GitHub Flow, and Trunk-Based Development -Need to revisit
+- [x] Use git reset (soft, mixed, hard) and git revert -Need to revisit
+- [x] Explain GitFlow, GitHub Flow, and Trunk-Based Development -Need to revisit
 - [x] Use GitHub CLI to create repos, PRs, and issues -Can do confidently
 
+
+
+## Task 2: Revisit Your Weak Spots
+1) First thing i revisited was networking side where i revised tcp-ip model osi model how it works what protocols are active in which layer
+   then tried my hands on commands like ping,dig,ss -tuln,sudo netstat -tupln, traceroute etc.
+   
+3) Secondly did revisit my shell script cheat sheet gone through loops,if else,while loops,until loops other concepts like awk,sed,grep etc
+   Also visited error handling concepts set -euo pipefail and cronjobs.
+   
+3)In git major part i can recall but i had some difficulties remembering rebase and merge revisited that.
+    Also did revision on branching strategies.
+
+   
 
 
 ## Task 3: Quick-Fire Questions
@@ -75,3 +88,50 @@ Answer these from memory (no Googling). Then verify your answers:
     LVM are logical volumes which are created from volume groups which are created from phyical volumes.
       we use lvm because we can resize them as per our wants without changing any thing in disk.
 
+
+## Task 5: Teach It Back
+
+### 1.Explain Git branching to a non-developer
+    In order to explain git branching to non-IT background guy:
+    First remember what is git, git is basically a version control system which can track the versions or changes.
+    In this context if we want to carry out different changes for the same file we can create several branches
+    for e.g one branch can be main branch which is actually live then other branches can be feature branch where we work on our updates
+    other branch can be hotfix branch where we fix any bugs from production.
+    So if we consider above scenario there are three different branches which we have created all for same file but the purpose is different 
+    by purpose i mean changes we make and even some times happen two branches do changes on same line in a file that also git informs us 
+    indicating that there is a merge conflict then we can open the file and select which change we want to keep.
+
+    
+### 2.Explain file permissions to a new Linux user
+    To remember what file permissions are you can think of a file as a door and there are three parties 
+    in the scenario owner,group and user so know the question is who will have what permissions.
+    Lets apply this in actuall linux file systems majorly there are three types of permissions
+    Read,Write and Execute which can we checked with command ls -l.
+    Then the parties are same on the left side there are permissions mentioned like rwxrwxrwx
+    first rwx is for owner next for group and third one for other users.
+    we can change ownerships by using below command:
+    chmod 777 file
+    So to calculate this numbers we need to remember read=4,write=2 and execute=1
+    for e.g if we are giving 777 permission to all the parties that means all three parties have all permissions
+    which can be obtained by doing addition of whatever permissions we want to give 7=4+2+1 
+    
+### 3.Explain what a crontab is and why sysadmins use it
+    crontab is basically a scheduler so there is backup script which we want to run on specific period
+    cron jobs help us to set that
+    the format of seeting cron job is 
+    * * * * *
+    first= 0-59 minutes
+    second= 1-24 hour
+    third= 1-30 Day of the month
+    fourth= 1-12 month
+    five= 0-6 week days
+
+    on terminal we will run command
+    crontab -e
+    which will ask us to select editor nano or vim
+    them we have to paste the schedule as per above format
+    30 8 * * * /bin/bash /home/user/backup.sh
+    then save and exit
+
+    to check the crontabs we can run
+    crontab -l
