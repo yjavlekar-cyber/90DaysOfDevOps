@@ -98,3 +98,24 @@
     
     - Then we will remove it by doing
         docker rm 27dc90abd377
+## Task 4: Explore
+### Run a container in detached mode — what's different?
+    To run container in detached mode means in background we use -d flag in docker run command as we did while running nginx container.
+
+### Give a container a custom name
+    yogesh_jawlekar@Profound:~$ docker run --name yogesh -d -p 80:80 nginx:latest
+    95c0c8972d1b90c35e3a0ac017aec9c6383ab42f6eb726d9122980a7fc4a25a5
+    yogesh_jawlekar@Profound:~$ docker ps
+    CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                                 NAMES
+    95c0c8972d1b   nginx:latest           "/docker-entrypoint.…"   4 seconds ago   Up 3 seconds   0.0.0.0:80->80/tcp, [::]:80->80/tcp   yogesh
+### Map a port from the container to your host
+    To map a port we can use -p as we have used in above example.
+### Check logs of a running container
+    To check container specific logs we can run:
+    docker logs containerid
+
+### Run a command inside a running container
+    Once the containers are created if we want to use it we will first have to execute it as bash which can be done with the help
+    of below command:
+    docker exec -it containerid bash
+    
