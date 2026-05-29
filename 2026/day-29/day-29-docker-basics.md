@@ -62,8 +62,39 @@
 
 ### Task 3: Run Real Containers
 #### Run an Nginx container and access it in your browser
+    With the help of below command we first run our docker cpntainer with nginx:latest official image available on docker registry which docker hub.
+    docker run -d -p 80:80 nginx:latest
 
-Run an Ubuntu container in interactive mode — explore it like a mini Linux machine
-List all running containers
-List all containers (including stopped ones)
-Stop and remove a container
+    In this at first it created the containers but the up status was missing because the nginx was also running on local which was using 80 port already to use this as 
+    container first stopped the nginx service and then ran the nginx container.
+    To use it in local just visited the below link which showed nginx official homepage.
+
+    http://localhost:80
+    
+### Run an Ubuntu container in interactive mode — explore it like a mini Linux machine
+    To run ubuntu container
+    docker run -it ubuntu
+    -it refers to interactive mode.
+    so when we run this command once the container is made we are directly into that container as root so now on linux we are running an ubuntu container.
+
+### List all running containers
+    - To list all the running container we can use
+    docker ps
+    
+### List all containers (including stopped ones)
+    - To list all the containers running or exited
+        docker ps -a
+### Stop and remove a container
+    - First we will list the containers:
+       docker ps -a
+    CONTAINER ID   IMAGE                     COMMAND                  CREATED              STATUS                        PORTS                                 NAMES
+    a9c9f334b451   ubuntu                    "/bin/bash"              About a minute ago   Exited (130) 19 seconds ago                                         stupefied_mclean
+    27dc90abd377   nginx                     "/docker-entrypoint.…"   8 minutes ago        Up 8 minutes                  0.0.0.0:80->80/tcp, [::]:80->80/tcp   elated_kepler
+    256411b30776   nginx                     "/docker-entrypoint.…"   14 minutes ago       Created                                                             xenodochial_jang
+    fb20ac98a340   nginx                     "/docker-entrypoint.…"   16 minutes ago       Created                                                             loving_
+    
+    - Then with the help of container id first we will stop the container as per our requirment:
+        docker stop 27dc90abd377
+    
+    - Then we will remove it by doing
+        docker rm 27dc90abd377
