@@ -27,3 +27,43 @@
     - images - Blueprint of our application which has all the dependencies.
     - containers - which runs on any system with the help of docker images.
     - registry - storage space for docker images.
+## Task 2: Install Docker
+### Install Docker on your machine (or use a cloud instance)
+    sudo apt install docker.io
+    [sudo] password for yogesh_jawlekar:
+    Reading package lists... Done
+    Building dependency tree... Done
+    Reading state information... Done
+    docker.io is already the newest version (29.1.3-0ubuntu3~24.04.2).
+    0 upgraded, 0 newly installed, 0 to remove and 8 not upgraded.
+
+    Using sudo apt install docker.io we can install docker in our system.
+    as docker is already installed it notifies us that it is already there.
+    
+### Verify the installation
+    This we can check with docker --version.
+    
+### Run the hello-world container
+    To run the docker container of hello-world the official image is hello-world
+    docker run hello-world
+### Read the output carefully — it explains what just happened
+    Once we run the hello-world container as above
+    It first check wether the image is available locally.
+    then it pulls the image from registry and informs us that pulling and downloading and downloaded.
+    The result of which is following output:
+    To generate this message, Docker took the following steps:
+     1. The Docker client contacted the Docker daemon.
+     2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+        (amd64)
+     3. The Docker daemon created a new container from that image which runs the
+        executable that produces the output you are currently reading.
+     4. The Docker daemon streamed that output to the Docker client, which sent it
+        to your terminal.
+
+### Task 3: Run Real Containers
+#### Run an Nginx container and access it in your browser
+
+Run an Ubuntu container in interactive mode — explore it like a mini Linux machine
+List all running containers
+List all containers (including stopped ones)
+Stop and remove a container
