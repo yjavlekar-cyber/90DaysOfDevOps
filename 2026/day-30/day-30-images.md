@@ -59,4 +59,29 @@
     This layers are listed in opposite order than this steps which are in docker file.
 
     0B shows that by that layer metadata was changed but no new files were added thats the reason the size is 0B.
+## Task 3: Container Lifecycle
+### Create a container (without starting it)
+    To create a container without running it we can use:
+    docker create nginx:latest
+### Start the container
+    To create and start at the sametime we can use:
+    docker run -d -p 80:80 nginx:latest
+### Pause it and check status
+    To pause we can use:
+    docker pause container-ID
+    After this if we check the docker ps
+    it will show that container but in status it will show as paused.
 
+### Unpause it
+    docker unpause container-ID
+    It will as usual in docker ps -a.
+    
+### Stop it
+    docker stop container-ID
+
+### Restart it
+    docker restart container-ID
+### Kill it
+    docker kill container-ID
+### Remove it
+    docker stop container-ID && docker rm container-ID
