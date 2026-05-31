@@ -85,3 +85,81 @@
     docker kill container-ID
 ### Remove it
     docker stop container-ID && docker rm container-ID
+
+
+## Task 4: Explore
+### 1.Run a container in detached mode — what's different?
+    To run container in detached mode means in background we use -d flag in docker run command as we did while running nginx container.
+
+### 2.Give a container a custom name
+    yogesh_jawlekar@Profound:~$ docker run --name yogesh -d -p 80:80 nginx:latest
+    95c0c8972d1b90c35e3a0ac017aec9c6383ab42f6eb726d9122980a7fc4a25a5
+    yogesh_jawlekar@Profound:~$ docker ps
+    CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                                 NAMES
+    95c0c8972d1b   nginx:latest           "/docker-entrypoint.…"   4 seconds ago   Up 3 seconds   0.0.0.0:80->80/tcp, [::]:80->80/tcp   yogesh
+### 3.Map a port from the container to your host
+    To map a port we can use -p as we have used in above example.
+### 4.Check logs of a running container
+    To check container specific logs we can run:
+    docker logs containerid
+
+### 5.Run a command inside a running container
+    Once the containers are created if we want to use it we will first have to execute it as bash which can be done with the help
+    of below command:
+    docker exec -it containerid bash
+    
+## Task 4: Working with Running Containers
+### 1.Run an Nginx container in detached mode
+    doccker run -d -p 80:80 nginx:latest
+### 2.View its logs
+    docker logs 6fae129280e1(container ID)
+
+### 3.View real-time logs (follow mode)
+    docker logs 6fae129280e1 -f
+    -f allows us to get live logs it basically follows the container and prints the live logs on terminal itself.
+### 4.Exec into the container and look around the filesystem
+    To enter into the container we can execute it by doing
+    docker exec -it 6fae129280e1 bash
+    The filesystem is similar to what we see in normal linux file structure there are several new folders in this dev  docker-entrypoint.d  docker-entrypoint.sh.
+### 5.Run a single command inside the container without entering it
+    To run commands without entering the container we can use:
+    Did practice by creating new folder and listing it.
+    docker exec container-ID mkdir new
+    docker exec container-ID ls
+
+### 6.Inspect the container — find its IP address, port mappings, and mounts
+    So when we do 
+    docker inspect container-ID
+    The whole json config file of that container which has all the information of the container.
+    We can check the ports,IP,state and network settings etc we can use docker inspect.
+
+## Task 5: Cleanup
+
+## 1.Stop all running containers in one command
+    docker stop $(docker ps -q) && docker rm $(docker ps -aq)
+    In the above command first by using docker ps -q we will find out all the running containers and stop them using docker stop.
+    Then we will list containers which are running and stopped both with the help of docker ps -aq and remove them.
+
+## 2.Remove all stopped containers in one command
+    docker container prune
+    Will delete all the stopped containers.
+    
+## 3.Remove unused images
+    There are several ways to delete unused images.
+    To remove dangling images which are created when we update an image and the older version takes place by using
+    docker image prune
+    
+    To only remove docker unused images only
+    docker image prune -a
+    
+    To remove all the images
+    docker rmi $(docker images -q)
+
+## 4.Check how much disk space Docker is using
+    docker system df
+    Will give us below details:
+    TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+    Images          34        12        9.606GB   3.738GB (38%)
+    Containers      21        4         28.74MB   24.62MB (85%)
+    Local Volumes   5         3         3.271GB   204.9MB (6%)
+    Build Cache     0         0         0B        0B
