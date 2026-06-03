@@ -11,7 +11,7 @@
     then executed the same using
     - docker exec -it containerID bash
     This will open shell to interact with mysql now we have to login using our password which we mentioned while running
-    mysql -u root -p
+    mysql -u root -pRun two containers on the default bridge — can they ping each other by name?
     This will ask for password once we enter we are into mysql
     Now we have to create databases and data inside those databases refer following sequence:
      - SHOW DATABASE; - To view any exisiting db
@@ -49,7 +49,7 @@
     if we create a new container with this volumes again with earlier command we can see our earlier data 
     inside our new container.
 
-  # ask 3: Bind Mounts
+  # Task 3: Bind Mounts
     Create a folder on your host machine with an index.html file
     Run an Nginx container and bind mount your folder to the Nginx web directory
     Access the page in your browser
@@ -63,5 +63,48 @@
     and if we visit our localhost on port 80 we will be to see the page.
     also if we change the data in our file it will directly change the webpage as well.
 
+# Task 4: Docker Networking Basics
+## 1.List all Docker networks on your machine
+    To list all the networks in docker:
+    docker network ls
+    This will list all the networks and its drives i.e network types.
     
+## 2.Inspect the default bridge network
+    To inspect the bridge network
+    docker network inspect ID
+    This will open up a config file which have all the details of the network id.
+
+## 3.Run two containers on the default bridge — can they ping each other by name?
+    Did run and exec two containers updated and installed ping in them and tried to ping by using the name which
+    we can find at the end when we do docker ps but there was error saying Temporary failure in name resolution.
+
+## 4.Run two containers on the default bridge — can they ping each other by IP?
+    But when i run and exec two same containers and did ping eachother by using IP addressed which we can find when we inspect those containers.
+    It was successful.
+The default bridge is meant for isolation hence if any container tied with it will only be reacheable with help of IP.
+But not by name because it does not docker does not provide a dns service so conatiner cannot ask network what is ip of container a lets suppose.
+
+# Task 5: Custom Networks
+## 1.Create a custom bridge network called my-app-net
+    To create a network we will run below command:
+    docker network create my-app-net
+## 2.Run two containers on my-app-net
+    To run containers on my-app-net we can use --network=my-app-net in the run command like below command:
+     docker run -d --network=my-app-net 3fb77868829b
+## 3.Can they ping each other by name now?
+    Yes this time I can now ping the container by using their name.
+
+ ## 4.Why does custom networking allow name-based communication but the default bridge doesn't?
+ ### Default bridge
+     As mentioned earlier the default bridge is an isolated bridge network thats the reason it only can communicate other containers using IP but 
+     not by name because docker does not provide dns service inside container for bridge networks.
+     every container that we run without --network get assigned to this default bridge.
+     - no dns
+     - all containers share it
     
+### User-defined bridge
+    This bridges are created by us using docker network create nameofnetwork.
+    - This containers has dns so we can connect them using names.
+    - Isolation is high because only invited containers are allowed.
+    - 
+ 
