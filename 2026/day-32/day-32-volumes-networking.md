@@ -108,3 +108,18 @@ But not by name because it does not docker does not provide a dns service so con
     - Isolation is high because only invited containers are allowed.
     - 
  
+# Task 6: Put It Together
+## 1.Create a custom network
+    docker network create my-app-net
+## 2.Run a database container (MySQL/Postgres) on that network with a volume for data
+    docker run -d -v /var/lib/docker/volumes/yogesh/_data:/var/lib/mysql --network=my-app-net -e MYSQL_ROOT_PASSWORD=passwd mysql:latest
+
+## 3.Run an app container (use any image) on the same network
+    docker run -d --network=my-app-net -p 80:80 nginx:latest
+
+## 4.Verify the app container can reach the database by container name
+    Yes the app container nginx can reach to the mysql container.
+    root@3fc0370df4d2:/# ping determined_bhabha
+    PING determined_bhabha (172.22.0.4) 56(84) bytes of data.
+    64 bytes from determined_bhabha.my-app-net (172.22.0.4): icmp_seq=1 ttl=64 time=2.67 ms
+    64 bytes from determined_bhabha.my-app-net (172.22.0.4): icmp_seq=2 ttl=64 time=0.057 ms
