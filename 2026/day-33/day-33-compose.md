@@ -112,3 +112,13 @@ WordPress should connect to MySQL using the service name
     docker compose down
 ### 7.Rebuild images if you make a change
     docker compose up -d --build
+
+## Task 5: Environment Variables
+1.Add environment variables directly in your docker-compose.yml
+2.Create a .env file and reference variables from it in your compose file
+3.Verify the variables are being picked up
+
+    In this task basically to hide the password in yaml file we created a .env file in that we assigned our actual password to a avrriable.
+    Then in our docker-compose.yml we assigned that variable as our password this creates high security as we are not using passwords directly.
+
+
