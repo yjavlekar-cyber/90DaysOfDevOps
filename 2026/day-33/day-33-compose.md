@@ -92,3 +92,23 @@ WordPress should connect to MySQL using the service name
     then i gave wpdb name to mysql then it got connected.
     
 
+## Task 4: Compose Commands
+
+### 1.Start services in detached mode
+    docker compose up -d
+### 2.View running services
+    docker compose ps
+    docker compose ls (to list down projects)
+    
+### 3.View logs of all services
+    docker compose logs
+    docker compose logs -f (for live logs)
+
+### 4.View logs of a specific service
+    docker compose logs nameofservice
+### 5.Stop services without removing
+    docker compose stop
+### 6.Remove everything (containers, networks)
+    docker compose down
+### 7.Rebuild images if you make a change
+    docker compose up -d --build
