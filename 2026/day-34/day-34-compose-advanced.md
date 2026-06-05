@@ -86,7 +86,7 @@
 
 #### Docker-compose.yml
 
-    # services:
+# services:
       Services is the main header which comes first under which we will code our containers.
     
       database:
