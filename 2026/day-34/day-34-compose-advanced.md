@@ -86,10 +86,10 @@
 
 #### Docker-compose.yml
 
-# services:
+    1.Services:
       Services is the main header which comes first under which we will code our containers.
     
-      database:
+      1.1 database:
         image: mysql:latest
         container_name: db
         restart: always
@@ -109,14 +109,32 @@
           - yogesh_db_data:/var/lib/mysql
         networks:
           - my-app-net
+    -EXPLANATION_
+    In 1.1 database we have first made our database container.
+    with its official image available on docker hub.
+    - image - official image
+    - conatiner_name - name which we decide
+    - restart - tells us incase of any error or the container stops or crashes how shall it restart always or manually.
+    - environment - This basically has the database root password and the database name which will connect to our backend.
+    - ports
+    - healthcheck - this is basically because if any other container is dependent on database this container should be healthy then only the other container should start in that case we will put this condition here.
+    - volumes - to keep our data safe even if the container is deleted we have attached volumes and there is another database which has some data for our current website.
+    -  networks - To keep all the networks on same page we will assign this to all containers.
+
     
-      redis:
-        image: redis:alpine
-        container_name: redis-cache
-        networks:
-          - my-app-net
+     1.2 redis:
+         image: redis:alpine
+         container_name: redis-cache
+         networks:
+           - my-app-net
+    -EXPLANATION_
+    As I know caches is basically a temporary storage where the website keeps certain data stored in order to not request the required data to the main database which might be slow in processing the data.
+    We normally have created redis with its image available on docker hub.
+    container name and network to be on the same page.
     
-      backend:
+
+    
+    1.3 backend:
         build: ./backend
         container_name: back
         environment:
@@ -133,8 +151,30 @@
             condition: service_started
         networks:
           - my-app-net
+
+
+    -EXPLANATION_
+    1.3 backend in this case is such container which contains the actual code which has logic of our website.
+    In this we have not taken image we have built it from the folder of backend where we already have our dockerfile.
+    - build - to build an image with already existing docker file.
+    - container_name - name of our container
+    - environment
+        This basically has actuall details which will help connect backend to our database
+        DB_HOST- this name of our database under which we have written all our database code.
+        DB_USER - which will be root
+        DB_PASS - the password which we have give to our database
+        DB_NAME - this name is the name which we have assigned in our host environment by the MYSQL_DATABASE which is shriwardhan_tourism
+        REDIS_HOST - this connecte redis to backend
+        secret_key - it hides your internal server secrets from being guessed or manipulated by the user's browser. It keeps the "handshake" between the browser and your server
+                      honest!
+    As backend can and shall only operate if the database is healthy and redis is started we will create
+    depends_on - first we will assign the container on which frontend is dependent in this case it is our database.
+                second we have healthcheck going on database if condition of that is healthy then only backend should start.
+                also redis where condition is if redis service is started then only start the backend.
+                
+
     
-      frontend:
+    1.4 frontend:
         build: ./frontend
         container_name: front
         ports:
@@ -143,10 +183,23 @@
           - backend
         networks:
           - my-app-net
-    
+
+             -EXPLANATION-
+             Then comes front end where jsut like backend we have used build, container_name and ports.
+             with that depends on if backend starts then only frontend should start.
+             and network to keep all the container on same page.
+
+        
     volumes:
       yogesh_db_data:
     
     networks:
       my-app-net:
-                               
+                 After all the containers are done we will also mention the volumes and networks sepreatly with services in the compose file.
+
+    Summary-
+    In this project we have three tiers:
+    Where database and redis is connected to backend and backend is connected to frontend.
+    we keep our database data secure by attaching volumes for data persistency.
+    We assign same networks to each container so that every container should be on same page.
+    
