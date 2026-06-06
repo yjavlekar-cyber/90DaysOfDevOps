@@ -78,11 +78,11 @@
 ## Task 5: Image Best Practices
 ### 1.Use a minimal base image (alpine vs ubuntu — compare sizes)
 
-  │ Image Tag      │ OS Base          │ Approx. Size │ Why use it?                                           │
-  ├────────────────┼──────────────────┼──────────────┼───────────────────────────────────────────────────────┤
-  │ node:22        │ Debian (Full)    │ ~1.1 GB      │ Testing, heavy builds, complex dependencies.          │
-  │ node:22-slim   │ Debian (Minimal) │ ~200 MB      │ Best for production if you need Debian compatibility. │
-  │ node:22-alpine │ Alpine Linux     │ ~130 MB      │ The Winner. Ultra-minimal, secure, and tiny.          |
+      │ Image Tag      │ OS Base          │ Approx. Size │ Why use it?                                           │
+      ├────────────────┼──────────────────┼──────────────┼───────────────────────────────────────────────────────┤
+      │ node:22        │ Debian (Full)    │ ~1.1 GB      │ Testing, heavy builds, complex dependencies.          │
+      │ node:22-slim   │ Debian (Minimal) │ ~200 MB      │ Best for production if you need Debian compatibility. │
+      │ node:22-alpine │ Alpine Linux     │ ~130 MB      │ The Winner. Ultra-minimal, secure, and tiny.          |
 
 ### 2.Don't run as root — add a non-root USER in your Dockerfile
       To run as nonroot user in copy will chang ownership
