@@ -58,4 +58,36 @@
     By this we not only reduce the size of our image but also make it secure like in normal images there are extra tools which are potential vulnerabilites.
     but in distroless we only have the copied files there is no shell, package managers which makes it secure cause no one can access it as it has no shell.
 
-    
+## Task 3: Push to Docker Hub
+### 1.Log in from your terminal
+    To login from cli into dockerhub
+    docker login -u
+    then it will ask for password, once password is entered we are logged in.
+
+### 2.Tag your image properly: yourusername/image-name:tag
+    Before pushing the image we first need to tag it:
+    docker tag hello_world:latest yjawlekar/hello_world:latest
+### 3.Push it to Docker Hub
+    docker push yjawlekar/hello_world:latest
+
+### 4.Pull it on a different machine (or after removing locally) to verify
+    After removing the locally available images related to this project we have the same image on dockerhub
+    we will pull it from there using below command:
+    docker pull username/hello_world:latest
+
+## Task 5: Image Best Practices
+### 1.Use a minimal base image (alpine vs ubuntu — compare sizes)
+
+  │ Image Tag      │ OS Base          │ Approx. Size │ Why use it?                                           │
+  ├────────────────┼──────────────────┼──────────────┼───────────────────────────────────────────────────────┤
+  │ node:22        │ Debian (Full)    │ ~1.1 GB      │ Testing, heavy builds, complex dependencies.          │
+  │ node:22-slim   │ Debian (Minimal) │ ~200 MB      │ Best for production if you need Debian compatibility. │
+  │ node:22-alpine │ Alpine Linux     │ ~130 MB      │ The Winner. Ultra-minimal, secure, and tiny.          |
+
+### 2.Don't run as root — add a non-root USER in your Dockerfile
+      To run as nonroot user in copy will chang ownership
+      and after that we will mention the user as nonroot.
+  
+     COPY --from=builder --chown=nonroot:nonroot /app /app
+    # Switch to the non-root user provided by Distroless
+    USER nonroot
