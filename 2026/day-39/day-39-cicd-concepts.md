@@ -88,3 +88,93 @@
                                            v
                                  [ STAGING ENVIRONMENT ]
                                      (App is Live!)
+
+
+## Exploring the Pipeline
+
+In below sample first we have trigger which gets triggered when the code is pushed of pull request is made.
+Then we have used a build stage where in total we have three jobs.
+Under job first we have used ubuntu OS as our runner.
+Then we have steps which have commands to perform certain tasks like uses: actions/checkout@v4 which will check the code from repo.
+
+    name: Test
+    
+    on:
+      push:
+        branches:
+          - master
+      pull_request:
+        types: [opened, synchronize]
+    
+    jobs:
+      # ==========================================
+      # STAGE 1: Linting
+      # ==========================================
+      lint:
+        name: Run Code Linting
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout Code
+            uses: actions/checkout@v4
+    
+          - name: Set up Python
+            uses: actions/setup-python@v5
+            with:
+              python-version: "3.10"
+    
+          - name: Install Dependencies
+            run: pip install -r requirements.txt
+    
+          - name: Run Linting
+            run: bash scripts/lint.sh
+    
+      # ==========================================
+      # STAGE 2: Testing (Runs only if Lint passes)
+      # ==========================================
+      test:
+        name: Run Pytest Suite
+        runs-on: ubuntu-latest
+        needs: lint # <-- Waits for lint stage
+        steps:
+          - name: Checkout Code
+            uses: actions/checkout@v4
+    
+          - name: Set up Python
+            uses: actions/setup-python@v5
+            with:
+              python-version: "3.10"
+    
+          - name: Install Dependencies
+            run: pip install -r requirements.txt
+    
+          - name: Run Tests
+            run: pytest
+    
+          # We must save the coverage files here before the runner destroys them
+          - name: Temporarily Save Coverage Files
+            uses: actions/upload-artifact@v4
+            with:
+              name: raw-coverage
+              path: htmlcov/
+    
+      # ==========================================
+      # STAGE 3: Artifact Upload (Runs only if Test passes)
+      # ==========================================
+      upload-coverage:
+        name: Upload Coverage Artifact
+        runs-on: ubuntu-latest
+        needs: test # <-- Waits for test stage
+        steps:
+          # We download the files saved from the test job runner
+          - name: Download Raw Coverage
+            uses: actions/download-artifact@v4
+            with:
+              name: raw-coverage
+              path: htmlcov/
+    
+          # This publishes the final artifact to your GitHub Actions run
+          - name: Upload Coverage Artifact
+            uses: actions/upload-artifact@v4
+            with:
+              name: coverage-report
+              path: htmlcov/
