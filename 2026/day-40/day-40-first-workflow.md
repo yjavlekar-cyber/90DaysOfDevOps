@@ -1,4 +1,4 @@
-# Your First GitHub Actions Workflow
+# My First GitHub Actions Workflow
 ## Task 1: Set Up
 - created a new public repository on github called github-actions-practice.
 - using git clone https cloned the repository on my local machine.
