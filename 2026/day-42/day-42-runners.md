@@ -81,5 +81,54 @@
 - Instead of using runners provided by github actions this time saved my local machine into github actions as self hosted runner.
 - In settings if we visit actions and then runners there we can click on new self hosted runner and it will give us the commands which we have to run on our terminal.
 - Once the runner setup is done in settings>actions>runners we will be able to see our local machine as runner which is idle as of now because it is not in use.
+
+## Task 4: Use Your Self-Hosted Runner
+- As I have already created self-hosted runner created below yml which gets triggered on a push and uses self hosted runner which is my laptop.
   
+      name: self
+      on:
+        push:
+          branches: [ "main" ]
+      jobs:
+        self_os:
+          runs-on: self-hosted
+      
+          steps:
+            - name: host
+              run: hostname
+      
+            - name: working dir
+              run: pwd
+      
+            - name: new-file
+              run: mkdir created-via-selfhosted-runner
+- In above yml insted of using ubuntu we have used our self-hosted runner.
+- we have assigned certain tasks like creating directory.
+- once the task is completed successfully we can see in pwd we have created the directory as mentioned in yaml.
+- Locally in our folder where we have the runner files if we run the run.sh it will show us live logs of the processes.
+  
+        yogesh_jawlekar@Profound:~/script/day41/actions-runner$ ./run.sh
+        √ Connected to GitHub
+        Current runner version: '2.335.1'
+        2026-06-18 06:31:31Z: Listening for Jobs
+        2026-06-18 06:33:13Z: Running job: self_os
+        2026-06-18 06:33:26Z: Job self_os completed with result: Succeeded
+## Task 5: Labels
+- Basically labels are tagging/name which we give to our self hosted runners.
+- This can be helpful when we have multiple runners.
+- if we use only self hosted actions will get confused on which runner it should run the job.
+  
+       jobs:
+        self_os:
+          runs-on: [ self-hosted, my-linux-runner ]
+  
+## Task 6: GitHub-Hosted vs Self-Hosted
+
+| Feature | GitHub-Hosted | Self-Hosted |
+|----------|---------------|-------------|
+| Who manages it? | GitHub | Your organization / team |
+| Cost | Pay-per-use minutes (depending on plan) | Infrastructure and maintenance costs |
+| Pre-installed tools | Many common tools and runtimes are pre-installed | You install and manage required tools yourself |
+| Good for | Quick setup, small-to-medium projects, minimal maintenance | Custom environments, large workloads, compliance requirements |
+| Security concern | Code and workflows run on GitHub-managed infrastructure | Full control over infrastructure, but you are responsible for securing it |
 
