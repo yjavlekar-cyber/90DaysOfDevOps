@@ -121,6 +121,9 @@
        jobs:
         self_os:
           runs-on: [ self-hosted, my-linux-runner ]
+
+  <img width="1200" height="562" alt="image" src="https://github.com/user-attachments/assets/91892f74-83f2-46c1-acef-ee8f6fca3bd6" />
+
   
 ## Task 6: GitHub-Hosted vs Self-Hosted
 
@@ -131,4 +134,9 @@
 | Pre-installed tools | Many common tools and runtimes are pre-installed | You install and manage required tools yourself |
 | Good for | Quick setup, small-to-medium projects, minimal maintenance | Custom environments, large workloads, compliance requirements |
 | Security concern | Code and workflows run on GitHub-managed infrastructure | Full control over infrastructure, but you are responsible for securing it |
+
+
+
+<img width="1364" height="519" alt="image" src="https://github.com/user-attachments/assets/63f04104-6331-4d11-88b2-a34900b00277" />
+
 
