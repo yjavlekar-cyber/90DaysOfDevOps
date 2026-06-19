@@ -161,3 +161,35 @@
 - job3 is where we want even if it false our pipeline should not be failed there if we see npm build is failed but still pipeline is green unlike job2 where on failure pipeline gets error.
 
   <img width="1162" height="569" alt="image" src="https://github.com/user-attachments/assets/5cdcce54-efaf-48d8-ae93-78f0f584a5e1" />
+
+## Putting It Together
+- In this yaml we have used three jobs first two are lint and test and third one is summary job which needs first two jobs to run then only it will run.
+- In summary we have used ${{ github.ref_name }} to print which branch has pushed this and ${{ github.event.commits[0].message }} to print commit message which both are github context variables.
+
+        name: together
+        on:
+          push:
+            branch: [ "any" ]
+        jobs:
+          lint:
+            runs-on: ubuntu-latest
+            steps:
+              - name: linting
+                run: echo "linting has started"
+          test:
+            runs-on: ubuntu-latest
+            steps:
+              - name: testing
+                run: echo "testing has started"
+          summary:
+            runs-on: ubuntu-latest
+            needs: [ lint,test ]
+            steps:
+              - name: prints branch name
+                run: echo "${{ github.ref_name }}pushed this"
+              - name: print commit message
+                run: echo "${{ github.event.commits[0].message }}"
+
+  <img width="1213" height="561" alt="image" src="https://github.com/user-attachments/assets/98c00cb5-fc7f-4179-b681-aac48f03a79d" />
+<img width="1077" height="517" alt="image" src="https://github.com/user-attachments/assets/b138ed22-86bd-42d6-a824-26fba311140e" />
+
