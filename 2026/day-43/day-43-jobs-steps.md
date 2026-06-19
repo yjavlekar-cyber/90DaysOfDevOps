@@ -29,6 +29,7 @@
 
 ## Environment Variables
 - Instead of hardcoding we can also use variables in the script.
+- variables can only used inside a box like if they are defined in a step they can only be used in the step only.
 - variables can be defined by using keywords-env.
 - There are two types of variables
   - 1) first which are defined by us in the script.
@@ -86,3 +87,77 @@
                 echo "-------------------------------"
 
 <img width="1114" height="574" alt="image" src="https://github.com/user-attachments/assets/071d9f9a-0d87-45d2-9cce-aaa31ddc9bc4" />
+
+## Job Outputs
+- Outputs are similar to env variable because both of them store data
+- But how output differs is that is can bypass jobs steps means it can be used outside the box.
+- In below yml we have two jobs.
+- In job 1 by using outputs we have stored the data which we have assigned inside the step which will rediect into GITHUB_OUTPUT
+- that can be used in the next job where we have created a variable inside that we have used needs.job1outputs and then using run we have printed it.
+  
+      name: job-outputs
+      on:
+        push:
+          branches: [ "main" ]
+      jobs:
+        job1:
+          runs-on: ubuntu-latest
+          outputs:
+            my_job_output: ${{ steps.print.outputs.yogesh }}
+          steps:
+            - id: print
+              run: echo "yogesh=profound" >> "$GITHUB_OUTPUT"
+        job2:
+          runs-on: ubuntu-latest
+          needs: job1
+          steps:
+            - name: use output from job1
+              env:
+                my_output: ${{ needs.job1.outputs.my_job_output }}
+              run: echo "$my_output"
+
+<img width="1025" height="498" alt="image" src="https://github.com/user-attachments/assets/5a76e220-93fb-45fd-a492-977f7ce45f1d" />
+
+## Conditionals
+- Conditionals are basically certain criteria we put like if this happens do this.
+
+        name: conditions
+        on:
+          push:
+            branches: [ "main" ]
+        jobs:
+          conditionals:
+            runs-on: ubuntu-latest
+            steps:
+              - name: runs only if branch is main
+                if: github.ref == 'refs/heads/main'
+                run: echo "deploying to production"
+          check_previous_step:
+            runs-on: ubuntu-latest
+            steps:
+              - name: run npm
+                run: npm build
+              - name: check previous step
+                if: failure()
+                run: echo "sending alert"
+          deploys:
+            runs-on: ubuntu-latest
+            if: github.event_name == 'push'
+            steps:
+              - name: deploy
+                run: echo "Deploying started"
+          linter:
+            runs-on: ubuntu-latest
+            steps:
+              - name: to check the code
+                continue-on-error: true
+                run: npm build
+              - name: check code
+                run: echo "code linted successfully"
+
+- job1 which is conditinals we have condition where only if the branch is main run command next to that shall execute.
+- job2 check_previous_step by using if failure we informed actions that if the previous step in there is failed then only echo sending alert in pipeline this job failed but it echoed the sending alert thing because of our if condition.
+- job2 this is an event based condition where if the event is push theny only do certain things.
+- job3 is where we want even if it false our pipeline should not be failed there if we see npm build is failed but still pipeline is green unlike job2 where on failure pipeline gets error.
+
+  <img width="1162" height="569" alt="image" src="https://github.com/user-attachments/assets/5cdcce54-efaf-48d8-ae93-78f0f584a5e1" />
