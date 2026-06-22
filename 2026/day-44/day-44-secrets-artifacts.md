@@ -16,9 +16,13 @@
   - This variables are like env variables which we can store and reuse them as per requirment.
   - Just like in the below yml when we print those variables it shows what was the actual value stored in the settings.
   - They can be used as ${{ vars.name }}
-  - Yaml:
+
+  - yaml:
+  - <img width="648" height="334" alt="image" src="https://github.com/user-attachments/assets/b05a5b43-1857-47b2-90f9-da1cf4733a17" />
+
+
+  -  Output:
   - <img width="988" height="394" alt="image" src="https://github.com/user-attachments/assets/baaa87d9-1510-4a10-9828-e7bb4f58b094" />
   
-  - output on github actions:
-  - <img width="648" height="334" alt="image" src="https://github.com/user-attachments/assets/b05a5b43-1857-47b2-90f9-da1cf4733a17" />
+  
 
