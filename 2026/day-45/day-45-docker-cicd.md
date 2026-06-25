@@ -84,15 +84,12 @@
                     DOCKER_USERNAME: ${{ vars.USERNAME }}
 
 
-- 
-   # | Issue                                                                                                                     | Fix
-  ---|---------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------
-   1 | 3 syntax errors — Job 2 used  uses:  instead of  run:  for docker pull, backend tag used  secrets.PASSWORD  instead of    | Changed  uses:  →  run: , fixed variable references, added  needs
-     | vars.USERNAME , and Job 2 missing  needs: build_and_push                                                                  |
-   2 | Username in secrets — Docker Hub username was stored in  secrets  instead of  vars , so  ${{ vars.USERNAME }}  was empty  | Moved username to repository variables ( vars.USERNAME )
-   3 | Invalid docker tag — Backend tag step still used  secrets.PASSWORD astheimagename                                         | Changedto {{ vars.USERNAME }}
-   4 | docker-compose.yml not found — Job 2 (self-hosted runner) had no  actions/checkout@v4 , so no repo files were available   | Added  actions/checkout@v4  step in Job 2
-   5 | Invalid reference format in compose —  docker-compose.yml  used  vars.USERNAME                                            | Changedto {DOCKER_USERNAME}  and passed it via  env:  in the workflow step
-     | (GitHubActionssyntax)whichdoesn'tworkinsidecomposefiles,plusbackendimageagainusedPASSWORD                                 |
+## Pipeline: `shriwardhan` (practice.yml)
 
-                 
+| # | Issue | Root Cause | Fix Applied |
+|---|-------|------------|-------------|
+| 1 | **3 syntax errors in pipeline** | Job 2 used `uses:` instead of `run:` for `docker pull` commands. Backend tag step used `secrets.PASSWORD` as image name. Job 2 was missing `needs: build_and_push`. | Changed `uses:` → `run:` for docker pull steps. Fixed variable reference to `vars.USERNAME`. Added `needs: build_and_push` to Job 2. |
+| 2 | **Username stored in secrets** | Docker Hub username was saved under **Secrets** instead of **Variables**, so `${{ vars.USERNAME }}` resolved to empty. | Moved username to **Repository Variables** (`Settings → Secrets and variables → Actions → Variables`). |
+| 3 | **Invalid docker tag (backend)** | Backend tag step still referenced `${{ secrets.PASSWORD }}` instead of `${{ vars.USERNAME }}`, causing an invalid image tag. | Changed `${{ secrets.PASSWORD }}` → `${{ vars.USERNAME }}` in the `docker tag` command. |
+| 4 | **docker-compose.yml not found** | Job 2 (self-hosted runner) had no `actions/checkout@v4` step, so the repository files were not available on the runner. | Added `actions/checkout@v4` as the first step in Job 2. |
+| 5 | **Invalid reference format in docker compose** | `docker-compose.yml` used GitHub Actions syntax `${{ vars.USERNAME }}` which is not recognized by Docker Compose. Backend image also incorrectly used `PASSWORD`. | Changed to Docker Compose syntax `${DOCKER_USERNAME}` and passed it via `env: DOCKER_USERNAME: ${{ vars.USERNAME }}` in the workflow step. |
