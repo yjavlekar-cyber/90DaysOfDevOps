@@ -56,18 +56,18 @@
 - when we push this the jobs in reusable where we have asked to print they use the inputs and environments and secrets declared in caller job.
   <img width="1263" height="535" alt="image" src="https://github.com/user-attachments/assets/39abaa49-024b-4a8f-b154-5de64f14b4b4" />
 
-    name: caller
-    on:
-      push:
-        branches: [ "main" ]
-    jobs:
-      token:
-        uses: ./.github/workflows/reusable-build.yml
-        with:
-          app_name: "my-web-app"
-          environment: "production"
-        secrets:
-          docker_token: ${{ secrets.DOCKER_TOKEN }}
+        name: caller
+        on:
+          push:
+            branches: [ "main" ]
+        jobs:
+          token:
+            uses: ./.github/workflows/reusable-build.yml
+            with:
+              app_name: "my-web-app"
+              environment: "production"
+            secrets:
+              docker_token: ${{ secrets.DOCKER_TOKEN }}
 
 ## Task 4: Add Outputs to the Reusable Workflow
 <img width="1079" height="1023" alt="image" src="https://github.com/user-attachments/assets/6a8fe6f4-c980-4578-9c48-be5d19294e9f" />
@@ -87,4 +87,35 @@ In this caller workflow:
 
 - In this common mistakes i made were of spellings,hyphens then sequence where in job needs should have been used first then runs-on.
 
+## Task 5: Create a Composite Action
+<img width="1071" height="814" alt="image" src="https://github.com/user-attachments/assets/708e40e1-8bdf-47b1-9693-418cc670a4dc" />
 
+- This is a workflow saved in different folder in .github.
+- In this we dont have to declare jobs we just need to use runs: using: composite.
+- In this we have used outputs directly from steps
+- the outputs from steps gets store in the outputs: greeted:
+  
+<img width="1247" height="615" alt="image" src="https://github.com/user-attachments/assets/a0a08d06-08bd-4af5-81f9-e0df56bda568" />
+
+- This is where we have called our composite workflow.
+- after checkout we need to mention id and path of our compiste workflow.
+- In this we have used the stored output in outputs:greeted: in steps.greeting.outputs.greeted
+- several mistakes:
+    - naming mismatch
+    - hyphen mismatch
+    - double qoutes missing
+    - indentation missing
+ 
+# Task 6: Reusable Workflow vs Composite Action
+
+| | Reusable Workflow | Composite Action |
+|---|---|---|
+| **Triggered by** | `workflow_call` | `uses:` in a step |
+| **Can contain jobs?** | Yes — one or more jobs, each with its own `runs-on` | No — no job layer at all, just a `steps:` list |
+| **Can contain multiple steps?** | Yes, within each job | Yes — that's its only structure |
+| **Lives where?** | A separate workflow YAML file under `.github/workflows/` | A folder with `action.yml` (or `.yaml`) under `.github/actions/<name>/` (or a separate repo) |
+| **Can accept secrets directly?** | Yes — has a dedicated `secrets:` block in `workflow_call` and the caller passes them explicitly | No — secrets aren't passed in directly; it inherits whatever environment/secrets the calling job already has access to |
+| **Best for** | Sharing entire job/workflow logic (multiple jobs, `runs-on`, matrix builds, multi-job pipelines) across workflows or repos | Sharing a reusable sequence of steps within a single job (e.g. setup, greeting, common shell logic) |
+
+## Key takeaway
+A reusable workflow is essentially a callable *workflow* (jobs and all), while a composite action is a callable *set of steps* that gets inlined into whatever job calls it — there's no job boundary inside a composite action.
