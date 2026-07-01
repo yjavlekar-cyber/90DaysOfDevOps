@@ -31,7 +31,7 @@
     - cron: ''30 3 * * *'
 
 
-# Task 4: Path & Branch Filters
+## Task 4: Path & Branch Filters
 
 <img width="772" height="439" alt="image" src="https://github.com/user-attachments/assets/ea73064a-a31f-4aa6-8c5c-e148103580b9" />
 
@@ -39,4 +39,20 @@
 - in above example earlier when i pushed with no changes it did not triggered.
 - but as i changed on of the mentioned files it got triggered.
 - also we can use 'paths-igonre' this will do not trigger if the changes are made in listed files to ignore.
+
+## Task 5: workflow_run — Chain Workflows Together
+- just like we use needs to create dependency of one job onto another.
+- we use workflow_run: workflows: types to only run the workflow when the mentioned workflow in this is successful.
+  
+<img width="680" height="388" alt="image" src="https://github.com/user-attachments/assets/24d7913f-b134-4dfc-a9fd-df74cd2788ab" />
+
+
+<img width="783" height="448" alt="image" src="https://github.com/user-attachments/assets/65959ebb-8e04-41ab-b573-9135fd069519" />
+
+## Task 6: repository_dispatch — External Event Triggers
+- This is the workflow which gets triggered not by any event on github but externall event.
+- in below example we pushed a workflow on github which includes on:repository_dispatch:types: and in our shell we have github loggein from there we un gh post which triggered our workflow.
+- here our shell acts as external system.
+
+<img width="807" height="353" alt="image" src="https://github.com/user-attachments/assets/c1c0aaa9-5893-42ad-b6a5-d03a4165e7df" />
 
