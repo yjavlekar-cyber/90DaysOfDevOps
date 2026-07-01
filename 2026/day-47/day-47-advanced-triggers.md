@@ -19,3 +19,21 @@
  <img width="1164" height="552" alt="image" src="https://github.com/user-attachments/assets/920a1b0c-136a-41b5-ba2c-3d105dd462ae" />
  <img width="1147" height="578" alt="image" src="https://github.com/user-attachments/assets/237c693c-9be6-4e53-a97d-6ea8e9a6b078" />
 
+## Task 3: Scheduled Workflows (Cron Deep Dive)
+
+<img width="1230" height="554" alt="image" src="https://github.com/user-attachments/assets/038d6eba-a22d-4ef8-abea-690a96ce01c2" />
+- In above workflow we have scheduled cron job basically two jobs one which which should have triggered.
+- github actions workflows are not guranteed to trigger on time they during high load they can be delayed.
+- The cron expression for: every weekday at 9 AM IST
+    - cron: ''30 3 * * *'
+
+
+# Task 4: Path & Branch Filters
+
+<img width="772" height="439" alt="image" src="https://github.com/user-attachments/assets/ea73064a-a31f-4aa6-8c5c-e148103580b9" />
+
+- this basically is triggered when files in mentioned path changed.
+- in above example earlier when i pushed with no changes it did not triggered.
+- but as i changed on of the mentioned files it got triggered.
+- also we can use 'paths-igonre' this will do not trigger if the changes are made in listed files to ignore.
+
