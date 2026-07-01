@@ -22,6 +22,9 @@
 ## Task 3: Scheduled Workflows (Cron Deep Dive)
 
 <img width="1230" height="554" alt="image" src="https://github.com/user-attachments/assets/038d6eba-a22d-4ef8-abea-690a96ce01c2" />
+
+
+
 - In above workflow we have scheduled cron job basically two jobs one which which should have triggered.
 - github actions workflows are not guranteed to trigger on time they during high load they can be delayed.
 - The cron expression for: every weekday at 9 AM IST
