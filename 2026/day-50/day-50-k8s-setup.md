@@ -25,7 +25,52 @@
    - But when it comes to descion making part where we will need to schedule new pod that time we will not be able to operate.
   
 3) What happens if a worker node goes down?
-- The node-controller from control manager checks for the worker nodes health.
-- Then scheduler which schedules pods finds healthy nodes where it can run pods.
-- In here our deployment.yml plays major role for auto healing where it keeps checking the actual state and desired state
-- If it finds any gap tried to fill it but if we only have pod.yml for our application once to worker nodes are down those pods will also cease to exist.
+  - The node-controller from control manager checks for the worker nodes health.
+  - Then scheduler which schedules pods finds healthy nodes where it can run pods.
+  - In here our deployment.yml plays major role for auto healing where it keeps checking the actual state and desired state
+  - If it finds any gap tried to fill it but if we only have pod.yml for our application once to worker nodes are down those pods will also cease to exist.
+## Kubectl installation
+- So in order to communicte with our clusters we will first need a client/kubectl which will comuunicate with our clusters.
+- Kubectl is CLI tool which helps us communicate with our clusters.
+- To install we can we visit official documentation provided by kubernetes.
+- As checked we already have kubectl installed.
+- 
+  x<img width="643" height="115" alt="image" src="https://github.com/user-attachments/assets/4d6d5f25-d28b-42c9-95d4-1a0b05cf5c7b" />
+
+
+## Cluster Set-up
+- To create cluster there several methods listed below:
+   - Kubeadm: which allows us to create bare metal K8s clusters.
+   - Kind: Kind allows us to install and run kubernetes inside docker the full form of kind is kubernetes inside docker.
+   - minikube: this is same as kind
+   - EKS: Elasctic kubernetes service is orchestration service provided by amazon web services.
+   - AKS from azure
+   - GKE from GCP (goggle kubernetes engine)
+
+- We will be using Kind method for practice
+  - prerequisites for which are
+    - docker
+    - kubectl
+   
+- we first created a kind-config.yaml
+<img width="1090" height="399" alt="image" src="https://github.com/user-attachments/assets/c644fdb7-6b43-404a-ada9-f5b195d78342" />
+  
+- Then we run kind create cluster --config=kind-config.yaml which creates our cluser as per the config in the file.
+<img width="1069" height="301" alt="image" src="https://github.com/user-attachments/assets/5f402a52-d1e8-4bef-9f5f-43dd5ae386f5" />
+
+- Commands used:
+  1) kind create cluster --config=filename.yaml - To create cluster
+  2) kind get clusters - to get lists of clusters live.
+  3) kubectl get nodes - This commands list downs total nodes created.
+  4) kubectl cluster-info - This gives us info on where control-plane and core dns is running.
+  5) kubectl describe node <node-name> - To get detailed info of one particular node.
+  6) kubectl get pods -A - See ALL pods running in the cluster (across all namespaces)
+  7) kubectl get namespaces - To list all namespaces
+  8) kind delete cluster --name=nameofcluster
+  9) kubectl config current-context - To check which cluster kubectl is currently connected
+  10) kubectl config get-contexts - list all available contexts (clusters)
+  11) kubectl config view - To see whole kubeconfig kube config tells us all the clusters,users and contexts.
+
+
+
+
