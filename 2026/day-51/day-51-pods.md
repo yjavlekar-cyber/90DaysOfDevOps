@@ -16,8 +16,10 @@
 
 ## Task 2: Created a Custom Pod (BusyBox)
 <img width="877" height="390" alt="image" src="https://github.com/user-attachments/assets/5a5f78fc-cb52-4bd6-b193-6231fbd5eaa4" />
+
 - I created a new busybox pod remembering how i created nginx pod keeping in mind basic structure such as apiVersion,kind,metadata and specs.
   
 <img width="1390" height="384" alt="image" src="https://github.com/user-attachments/assets/b1b99e7d-511c-43dc-b832-ceb130067fea" />
+
 - When we checked logs by running kubectl logs busy-box it give us hello from busy box as mentioned in above screenshot.
   
