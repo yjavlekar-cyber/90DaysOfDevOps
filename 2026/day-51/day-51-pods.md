@@ -48,3 +48,10 @@ While creating our pods we have give labels to them we now see some commands thr
 - kubectl label pod nginx-app environment=dev : Through this we can add a label to our existing pod.
 
 <img width="1365" height="704" alt="image" src="https://github.com/user-attachments/assets/1f61d961-8e33-46aa-b65d-61ec08d5efd0" />
+
+## Task 6: Clean Up
+- To clean up or delete we can ran kubectl delete pod nginx-app or we can delete through yaml kubectl delete -f nginx-pod.yaml
+ - kubectl delete pod pod-name
+ - kubectl delete -f pod.yaml
+<img width="696" height="397" alt="image" src="https://github.com/user-attachments/assets/196c97c5-20d6-418b-8a3b-044e859d4657" />
+
