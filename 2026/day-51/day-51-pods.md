@@ -23,3 +23,28 @@
 
 - When we checked logs by running kubectl logs busy-box it give us hello from busy box as mentioned in above screenshot.
   
+## Task 3: Imperative vs Declarative
+- To create pods or any of the objects in kubernetes they are two ways
+   - Declarative - Where we create yaml files and then run apply.
+   - Imperative - In this approach we run commands to create the object using kubectl run as mentioned in below snap.
+     also once the pod is create we can run command kubectl get pod redis-pod -o yaml which will give us the yaml file created by kubernetes itself after we run our imperative command.
+
+<img width="1175" height="849" alt="image" src="https://github.com/user-attachments/assets/e5b6e03a-6339-4707-b000-00a64896bec5" />
+
+
+## Task 4: Validate Before Applying
+- Before applying our actual yaml we can also validate it by using --dry-run=client and --dry-run=server
+- First i ran this command with proper yaml which validated the yaml and gave output that yaml is unchanged after it was applied.
+- Then i deliberately messed up the syntax of the yaml and when i ran the command after that it gave error and informed me on the first two-three lines what might be the reason.
+
+<img width="1636" height="899" alt="image" src="https://github.com/user-attachments/assets/d79efd41-1ec7-48ef-9077-748af0644651" />
+
+## Task 5: Pod Labels and Filtering
+While creating our pods we have give labels to them we now see some commands through which we can list down our pods with their labels and also see how we can delete certain given labels as well.
+
+- kubectl get pods --show-labels : This command will help us to list down the pods with their labels.
+- kubectl get pods -l app=nginx : This will only list the pods which have this as label.
+- kubectl label pod busy-box environment- : This command will remove the environment label from pod named busy-box.
+- kubectl label pod nginx-app environment=dev : Through this we can add a label to our existing pod.
+
+<img width="1365" height="704" alt="image" src="https://github.com/user-attachments/assets/1f61d961-8e33-46aa-b65d-61ec08d5efd0" />
