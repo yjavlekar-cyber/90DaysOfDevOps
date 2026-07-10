@@ -58,3 +58,32 @@
 
   
 ## Task 5: Scale the Deployment
+- just like self healing where kubernetes tries to match the desired state mentioned in deployment.yaml even if we delete some pods.
+- we can also scale up and down as per our requirments
+    - we can edit our yaml files and change the replicas and then apply them
+    - OR we ran
+        - kubectl scale deployment nginx-dev --replicas=5/1 -n dev
+    - through this imperative method we can also scale up or down as per our requirments.
+
+<img width="1130" height="518" alt="image" src="https://github.com/user-attachments/assets/19135d55-ae3b-401d-bb34-f1a7ff39e35f" />
+
+## Task 6: Rolling Update
+- By default kubernetes replaces pods one by one — old pods are terminated only after new ones are healthy. This means zero downtime.
+- To analyze this we first changed the image of our current deplyment to new image
+  - kubectl set image deployment/nginx-dev nginx=nginx:1.25.1 --record=true -n dev
+  - This will change our current image version from the name space dev.
+- Then we checked the status using:
+  - kubectl rollout status deployment/nginx-dev -n dev
+  - which shows us that the kubernetes is rolling out our pods or changing our pods one by one
+- we can also check history of the same by using:
+  - kubectl rollout history deployment/nginx-dev -n dev
+- Now we will undo the rollout and we will revert back to our previous image:
+  - kubectl rollout undo deployment/nginx-dev -n dev
+  - This will revert back our pods to previous image version.
+- To check the current image we can run:
+  - kubectl describe deployment nginx-dev -n dev | grep Image
+
+<img width="1914" height="985" alt="image" src="https://github.com/user-attachments/assets/60a2b36e-724d-4366-967a-461efad04481" />
+
+
+
