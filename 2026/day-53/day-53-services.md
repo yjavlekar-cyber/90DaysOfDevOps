@@ -112,9 +112,9 @@ ClusterIP is the default Service type. It gives your Pods a stable internal IP t
   <img width="1066" height="391" alt="image" src="https://github.com/user-attachments/assets/dd68f27c-fff5-4d82-b8ae-ecda7784e3d2" />
   <img width="647" height="479" alt="image" src="https://github.com/user-attachments/assets/90bfd9c4-fa7d-4b8c-8789-4cd2d3cf0fdb" />
 
-
-|  Type | Accessible  | From	| Use Case |
-|ClusterIP | Inside the cluster only | Internal communication between services |
-| NodePort | Outside via <NodeIP>:<NodePort> | Development, testing, direct node access |
-| LoadBalancer |	Outside via cloud load balancer | Production traffic in cloud environments |
+| Type | Accessible From | Use Case |
+|---|---|---|
+| ClusterIP | Inside the cluster only | Internal communication between services |
+| NodePort | Outside via `<NodeIP>:<NodePort>` | Development, testing, direct node access |
+| LoadBalancer | Outside via cloud load balancer | Production traffic in cloud environments |
 
