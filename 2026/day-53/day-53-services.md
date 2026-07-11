@@ -46,6 +46,7 @@ ClusterIP is the default Service type. It gives your Pods a stable internal IP t
 - And in spec we have matched our labels from deployment as selector in service to connect both
 - then type as clusterIP which gives us stable IP which accesable inside our cluster
 - and port from which our traffic will connect to a target port.
+- so we were able to do this inside a port on our terminal we cannot do this because this operates on pod level.
   
       apiVersion: v1
       kind: Service
@@ -59,4 +60,61 @@ ClusterIP is the default Service type. It gives your Pods a stable internal IP t
         - port: 80
           targetPort: 80
 
+
+- To check this we will first run one pod in our cluster with kubectl run test-client --image=busybox:latest --rm -it --restart=Never -- sh
+- Then inside the pod  wget -qO- http://clus-service.dev .dev is basically our namespace.
+- the result of which is nginx page
+- this tells us that in same cluster through service we can connect different pods.
+
+## Task 3: Discover Services with DNS
+- kubernetes has built in DNS server.
+- Every service created in kubernetes gets it own DNS entry automatically.
+        <service-name>.<namespace>.svc.cluster.local
+- To check this first we run kubectl run dns-test --image=busybox:latest --rm -it --restart=Never -n dev -- sh in our namespace.
+- Then inside this pod if we do nslookup clus-service(which is our servce name) which shows our service's cluster IP and its Domain name.
+- It will show us
+  
+         Name:   clus-service.dev.svc.cluster.local
+         Address: 10.96.132.74
+
+<img width="1772" height="624" alt="image" src="https://github.com/user-attachments/assets/cefa1613-102a-499d-8eca-0d0e7013635b" />
+
+## Task 4: NodePort Service (External Access via Node)
+
+- Through Nodeport we can expose our application on a port on every node due to this we can excess our service outside the cluster as well.
+- First we created a service.yaml which uses type-NodePort and seprate nodePort which routes traffic from port to targetport to nodeport which is accesiable on our terminal and outside.
+  
+      apiVersion: v1
+      kind: Service
+      
+      metadata:
+        name: node-service
+      
+      spec:
+        selector:
+          app: nginx
+      
+        type: NodePort
+      
+        ports:
+          - port: 80
+            targetPort: 80
+            nodePort: 30020
+- If we curl our nodes IP with our nodeport it will bring back our nginx page because obiviously our pods are of nginx.
+<img width="553" height="475" alt="image" src="https://github.com/user-attachments/assets/bfe7c1cb-8cb6-4367-b5e7-36fe502152ca" />
+
+
+## Task 5: LoadBalancer Service (Cloud External Access)
+- LoadBalancer service type routes or balances the external traffic routes traffic to our nodes.
+- For this we created serviec.yaml with type: LoadBalancer
+- Once we apply this and when we do get services external IP will be pending
+- because loadbalancer service is only helpful if we have provisioned loadbalancer on cloud
+  <img width="1066" height="391" alt="image" src="https://github.com/user-attachments/assets/dd68f27c-fff5-4d82-b8ae-ecda7784e3d2" />
+  <img width="647" height="479" alt="image" src="https://github.com/user-attachments/assets/90bfd9c4-fa7d-4b8c-8789-4cd2d3cf0fdb" />
+
+
+|  Type | Accessible  | From	| Use Case |
+|ClusterIP | Inside the cluster only | Internal communication between services |
+| NodePort | Outside via <NodeIP>:<NodePort> | Development, testing, direct node access |
+| LoadBalancer |	Outside via cloud load balancer | Production traffic in cloud environments |
 
