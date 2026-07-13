@@ -60,3 +60,16 @@ Kubernetes solves this with ConfigMaps for non-sensitive config and Secrets for 
 
  <img width="1156" height="720" alt="image" src="https://github.com/user-attachments/assets/027ec748-5221-4278-88cf-bbf0f0a53540" />
 
+## Task 6: Update a ConfigMap and Observe Propagation
+- In this what we are doing is we will see wether our yaml reads our config file if we update the same after the creation.
+- first er created a config file and applied it.
+- then in yaml file we used it as volume
+- then using command
+  - kubectl patch configmap live-config --type merge -p '{"data":{"message":"world"}}
+- we updated the config key which was message hello now patched to world
+- if we check logs it will show us the difference
+- for this we set command in pod yaml to read the config every 5sec to adapte to new changes.
+- if this was injected with volume only with the like variables using configkey the values can only be injected at the stirt of container birth.
+
+a
+<img width="889" height="624" alt="image" src="https://github.com/user-attachments/assets/c50738d4-ed5d-47c4-a450-98c1033ee345" />
