@@ -40,3 +40,23 @@ Kubernetes solves this with ConfigMaps for non-sensitive config and Secrets for 
 - and inside the container we have mentioned volumeMounts:name(sameasabovevolname):mountPath(which we set deafult at the time of creation of that config)
 
 <img width="867" height="572" alt="image" src="https://github.com/user-attachments/assets/46baafc8-8788-439a-aa75-09dc50c91080" />
+
+
+## Task 4: Create a Secret
+- created a secret with imperative way using below command
+  - kubectl create secret generic db-secrets --from-literal=DB_USER=admin --from-literal=DB_PASSWORD=s3cureP@ssw0rd
+  - them to check the yaml i ran kubectl get secrets db-secrets -o yaml
+  - we can see in secrets the values get encoded in base64 format
+  - to decode we echo our value through pipe into base64 --decode
+    -  echo 'value' | base64 --decode
+
+<img width="1645" height="435" alt="image" src="https://github.com/user-attachments/assets/7f9ed20b-58f7-47e3-a3dc-12fb79cd773f" />
+
+## Task 5: Use Secrets in a Pod
+- In this task we created an nginx pod where we first assigned at the spec level our secrets.
+- then we injected onky DB_USER from db-secrets and afterwards we attached the db-secrets as volume
+- once the pod was created when i did exec commands inside the pod like ls the folder /etc/db-user it listed the files of the secrets it made also if we do cat inside that container the secrets are not encoded.
+   - kubectl exec pod/nginx-app -- ls /etc/db-secrets
+
+ <img width="1156" height="720" alt="image" src="https://github.com/user-attachments/assets/027ec748-5221-4278-88cf-bbf0f0a53540" />
+
