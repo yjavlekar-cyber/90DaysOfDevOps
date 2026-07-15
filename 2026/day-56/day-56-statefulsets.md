@@ -35,3 +35,26 @@ Today I will learn StatefulSets — the workload designed for stateful applicati
 - and when we apply this we can see both the pods and the pvc created have orederd names
 <img width="1447" height="484" alt="image" src="https://github.com/user-attachments/assets/f1555ec7-4d2a-4d7d-87f5-ebe10eed4c76" />
 
+## Task 4: Stable Network Identity
+Each StatefulSet pod gets a DNS name: <pod-name>.<service-name>.<namespace>.svc.cluster.local
+- In here we first created a busybox pod and exec into it
+- then we did nslookup for our stateful pod names with the dns name it returened back our IP
+- which proves that services with clusterIP none directly gives DNS for IPs of our pods.
+  
+<img width="1280" height="676" alt="image" src="https://github.com/user-attachments/assets/1d4150ce-710b-4ce0-a16f-be93987acc66" />
+
+
+## Task 5: Stable Storage — Data Survives Pod Deletion
+- as we have our pvc attached to our pods
+- we did exec into our pod and created a file
+- and then deleted the same pod the stateful set regenerated the pod
+- and now when I checked the files are still their
+
+## Task 6: Ordered Scaling
+- To scale up and down we did it just like deployment
+- used commands kubectl scale statefulset staful --replicas=5
+- This scales up and down in order when doing scaling up it does like 0,1,2 if down 2,1,0
+
+<img width="1548" height="736" alt="image" src="https://github.com/user-attachments/assets/3119dc1f-dd78-45a1-a761-b723cb2573d1" />
+
+
