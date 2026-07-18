@@ -18,3 +18,13 @@ Today we will set resource requests and limits for smart scheduling, then add pr
  
 - This matters because in kubernetes this classes determine in scenarios where any certain node is low on resources which pods would be evicted.
 - besteffort------>burstable------>Guranteed
+
+
+## OOMKilled — Exceeding Memory Limits
+
+<img width="1901" height="977" alt="image" src="https://github.com/user-attachments/assets/1c9b27d5-e1b3-46d6-b372-24a9509363af" />
+
+- In this what we have done is created an another pod which has limit set for memory of 100M
+- but in command we have asked it to use around 200M
+- because of this whenever container tries to start it is killed with exit code 137 which is basically due to OOM (out of memory).
+- and as it gets killed the pod again tries to start and again it goes into OOM this loop continues hence our pod is going into crashloopbackoof state.
