@@ -48,3 +48,47 @@ Today we will set resource requests and limits for smart scheduling, then add pr
 
 <img width="1910" height="772" alt="image" src="https://github.com/user-attachments/assets/0f78f94f-077a-4507-9c5f-af2e1809e128" />
 
+## Liveness Probe
+liveness probe basically checks our container is alive or not.
+- In this task we created a pod which creates a file the deletes it and waits for 1 hour.
+- Then liveness probe is triggeered which checks for the file created but it was already deleted when the liveness probe started.
+- liveness probe waits for 5 seconds and tries and if error again tries after 5 sec.
+
+<img width="591" height="566" alt="image" src="https://github.com/user-attachments/assets/91fbc463-8edd-4c25-b305-ad3ff3dea318" />
+
+- Also we can watch it live by running kubectl get pod pod-name -w
+- liveness checks if pod is alive if not it tried to restart it
+
+
+## Readiness Probe
+A readiness probe controls traffic. Failure removes the Pod from Service endpoints but does NOT restart it.
+- readiness probe basically checkd wether our pod is ready to handle external traffic.
+- and traffice can be routed only through the service resource.
+
+<img width="985" height="428" alt="image" src="https://github.com/user-attachments/assets/a92a84a7-6b6c-419d-99c4-7b073e3dd174" />
+
+- In this what we have done we have created a pod which checks for readiness probe through httpGet which check the root path on port 80.
+- first we have initialdelayseconds once the pod comes into existenece it waits for sometime and starts its first probe and after that we have period seconds which defines in what period duration probes should
+  take place.
+- onec our yaml is ready we apply it
+- then we expose our pod to a readiness-svc by running kubectl expose pod pod-name --port=80 --name=readiness-svc
+- then kubelet reads the output from readiness probe ready=true the endpointslice contrioller adds the ip of that pod to serivecs endpoint list and vice versa
+  
+<img width="1238" height="556" alt="image" src="https://github.com/user-attachments/assets/061400dd-8ca9-4f95-9486-24aa6c4046f2" />
+
+- In here first our readiness probe was true so the ready status for nginx pod was 1/1
+- as soon as we removed the file which was actuall serving our endpoint because of which our condition of doing httpget to the root path will be failed
+- the pod eventually goes to ready from 1/1 to 0/1
+
+## Startup Probe
+<img width="1187" height="757" alt="image" src="https://github.com/user-attachments/assets/bea86937-dd2e-4abb-87c9-54ca3fdc1dcb" />
+
+- we basically are using same script which we used earlier for liveness probe and now we are using the same script with startup probe
+- startup probe basically starts before the actuall liveness probe
+- in this scenario it waits 5 second and tried to find the file
+- it finds the file because in our operation we are creating a file and after waiting for 30 seconds deleteting the same file but startup probe starts probing rightaway when we hit apply.
+- it just waits for periodSecond for 5 seconds and then tries to find the file and as it finds the file it passed the check and liveness probe starts probing.
+- here the startup probe is not alive through the script just at the begining befor liveness probe.
+
+<img width="1187" height="757" alt="image" src="https://github.com/user-attachments/assets/df347afc-dd98-4957-ba06-9d9c27c14a5c" />
+
