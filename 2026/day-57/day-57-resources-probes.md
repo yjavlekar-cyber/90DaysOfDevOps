@@ -28,3 +28,23 @@ Today we will set resource requests and limits for smart scheduling, then add pr
 - but in command we have asked it to use around 200M
 - because of this whenever container tries to start it is killed with exit code 137 which is basically due to OOM (out of memory).
 - and as it gets killed the pod again tries to start and again it goes into OOM this loop continues hence our pod is going into crashloopbackoof state.
+
+## Pending Pod — Requesting Too Much
+- In this we have assigned resources which are way out of expectiations where our cpu is 100 as we have not mentioned M it assumes that we want whole 100 cores.
+- then in memory we normally go for Mi but here we have used Gi which is way above normal we can refer below table as well.
+
+| Unit | Resource Type | Meaning | Example | Actual Value |
+|------|---------------|---------|---------|---------------|
+| (no suffix) | CPU | Whole core(s) | `cpu: "1"` | 1 full CPU core |
+| `m` | CPU | Millicore (1/1000 of a core) | `cpu: "100m"` | 0.1 core (10% of one core) |
+| `m` | CPU | Millicore | `cpu: "500m"` | 0.5 core (half a core) |
+| `Ki` | Memory | Kibibyte (1024 bytes) | `memory: "128Ki"` | 128 × 1024 bytes |
+| `Mi` | Memory | Mebibyte (1024 Ki) | `memory: "128Mi"` | ~134 million bytes |
+| `Gi` | Memory | Gibibyte (1024 Mi) | `memory: "1Gi"` | ~1.07 billion bytes |
+| `Ti` | Memory | Tebibyte (1024 Gi) | `memory: "1Ti"` | rarely used at pod level |
+| `K`, `M`, `G`, `T` | Memory | Decimal versions (1000-based, not 1024) | `memory: "128M"` | 128,000,000 bytes |
+
+- because of our unxpected or abnormal resource allocation the pod status got into pending and it threw an error of insufficient cpu and memory which was obvious.
+
+<img width="1910" height="772" alt="image" src="https://github.com/user-attachments/assets/0f78f94f-077a-4507-9c5f-af2e1809e128" />
+
