@@ -34,7 +34,7 @@
 - First we installed nginx chart from bitnami by running helm install nginx bitnami/nginx
 - Then as we know that charts are basically folders that we can verify using kubectl get all we can see deployment and all that is also created.
     
-<img width="1899" height="850" alt="image" src="https://github.com/user-attachments/assets/d240240e-2489-499f-9d91-4a83ab621f84" 
+<img width="1899" height="850" alt="image" src="https://github.com/user-attachments/assets/d240240e-2489-499f-9d91-4a83ab621f84" />
 
 <img width="1071" height="307" alt="image" src="https://github.com/user-attachments/assets/8158d90e-6fa6-48e8-b502-7092a14f3e42" />
 
