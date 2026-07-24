@@ -27,3 +27,8 @@ Today I will put it all together. Deploy a real WordPress + MySQL application us
 5) we can exec into the pod and see our data is showing their
    
        kubectl exec -it pod-name -- mysql -u root -p
+
+## Task 3: Deploy WordPress (Days 52, 54, 57)
+- Here we first created a configmap which will have our host and db name.
+- then we created a deployment where we ingested our configmap values and used already applied secrets which were already declaraed in database secrets
+- we have also used liveness and readiness probe as well
