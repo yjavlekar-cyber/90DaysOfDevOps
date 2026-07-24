@@ -78,4 +78,8 @@
 
 
 
-
+## Task 6: Create Your Own Chart
+- As we the structuring which we require to create a helm chart we can run helm create chart-name which will create a folder that will have Charts yaml,values and templates.
+- we can validate or check if our folder is proper and we can run helm lint . or helm lint name (outside the folder)
+- then we listed all of our files in one go with helm template my-release my-app which acts as a cat commands lists down templates folder as one file
+- then once we have the chart we can install it or upgrade it as we want
