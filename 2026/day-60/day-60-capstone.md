@@ -32,3 +32,20 @@ Today I will put it all together. Deploy a real WordPress + MySQL application us
 - Here we first created a configmap which will have our host and db name.
 - then we created a deployment where we ingested our configmap values and used already applied secrets which were already declaraed in database secrets
 - we have also used liveness and readiness probe as well
+
+## Task 4: Expose WordPress (Day 53)
+- Then we created a nodeport service so that we can access it through our browser.
+- as we were using kind we have to do port forwarding.
+
+## Task 5: Test Self-Healing and Persistence
+- Then if we delete the pods we can see as we the self healing and also data persistance because of the pvcs
+
+## Task 6: Set Up HPA (Day 58)
+- Then we set up an horizontol pod scaler which will keep mini 2 and max 10 pods if the usage crosses 50 percent utilization.
+
+## Project flow
+- first we created a statefulset for our mysql pods which gets secrest from the secrest yaml and a for that we have also created a headless service.
+- then we created a wordpress deployment which uses secrets from the db and a configMap variables where we have defined the host which is the services linked to our db pods.
+- and then again we created a nodeport service to access word press from browser.
+- So how all this is connected:
+   - the traffic travels through nodeport into wordpress pod which then usues db host which is our service through that service we are entering db for the data.
