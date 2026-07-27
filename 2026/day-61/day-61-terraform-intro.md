@@ -26,3 +26,25 @@
 - Terraform is declarative because we have to declare our desired state of infrastructure.
 - and we use terraform specifically to create infrastructure on cloud platforms hence it is also called as 'cloud-agnostic'.
   
+## Task 2: Install Terraform and Configure AWS
+- To install terraform we went to terraform website and copied the linux installation command and once installed to check we can run terraform -version.
+- Then we have to first install aws cli by running aws configure
+   - First we have to create a IAM user where we can create security credentials access key and secret key.
+   - In our terminal we will run aws configure which will ask us for this keys once entered we are into aws cli.
+   - To confirm we will run aws sts get-caller-identity.
+ 
+
+## Task 3: Your First Terraform Config -- Create an S3 Bucket
+- For this first we created a main.tf file which will hold our configuration for our resource and providers.
+<img width="582" height="310" alt="image" src="https://github.com/user-attachments/assets/61da47e8-5497-4556-90bd-45320323170d" />
+
+- where we have first declaraed our provider region and resources of aws which is s3_bucket and its name and arguments inside it with bucket name and tags.
+- Once this is done we will run terraform init which will initilize the folder as terraform folder and create files terraform.tfstate  terraform.tfstate.backup
+- Then after this once we apply this will apply the tf file by running terraform apply.
+- at first i was getting error because the IAM user only had s3 read access once i gave the full access the bucket was created and we can confirm that on the aws console.
+
+## Task 4: Add an EC2 Instance
+<img width="1317" height="688" alt="image" src="https://github.com/user-attachments/assets/d336578d-55a8-4b4a-8da4-2970194368a4" />
+
+- added one more resource block for ec2 instance with the vpc and subnet inside the ec2
+- gave vpc policies
