@@ -48,3 +48,22 @@
 
 - added one more resource block for ec2 instance with the vpc and subnet inside the ec2
 - gave vpc policies
+- after i applied it i can see ec2 is created successfully.
+
+## Task 5: Understand the State File
+
+1.What information does the state file store about each resource?
+- when we view the state file or run command terraform show it gives us basically all the metadata which is listed inside our resources.
+  
+2.Why should you never manually edit the state file?
+- So the general process of creating infra on cloud is that we create a main.tf file which updates our statefile which is directly connected to our deployment.
+- whenever we directly edit the state file it affects our deployment as well plus our desired state which is mentioned in our main.tf will not match our statefile.
+- because of the above factors in three of the scenarios we will face mismatch.
+  
+3.Why should the state file not be committed to Git?
+- statefile is a single source of truth which is directly connected to our deployment so if we commit the statefile it can be misused to
+  which can hamper our deployed infrastructure.
+- also statefile stores secrets like api keys and other in plain text which can be harmful.
+
+
+## In order to destory our infrastructure we can run the command- terraform destroy
