@@ -54,47 +54,48 @@ so when i change the region as the ami is constant it will automatically fetch t
 - also networking functions such as cidrsubnet("10.0.0.0/16", 8, 1)
 
 # 🗺️ The Terraform Data Flow
- ┌───────────────────────────┐         ┌───────────────────────────┐
- │   1. USER DATA CONTENT    │         │  2. LIVE CLOUD REALITIES  │
- │  (Changes per deployment) │         │   (Controlled by the API) │
- └─────────────┬─────────────┘         └─────────────┬─────────────┘
-               │                                     │
-               ▼                                     ▼
- ┌───────────────────────────┐         ┌───────────────────────────┐
- │     terraform.tfvars      │         │          data.tf          │
- │   project_name = "ecom"   │         │ data "aws_ami" "linux"    │
- │   environment  = "dev"    │         │ data "aws_az" "available" │
- └─────────────┬─────────────┘         └─────────────┬─────────────┘
-               │                                     │
-               ▼                                     │
- ┌───────────────────────────┐                       │
- │       variables.tf        │                       │
- │  Checks types, validates  │                       │
- │  inputs from .tfvars file │                       │
- └─────────────┬─────────────┘                       │
-               │                                     │
-               ▼                                     │
- ┌───────────────────────────┐                       │
- │         locals.tf         │                       │
- │  Combines & fixes formatting │                    │
- │  name_prefix = "ecom-dev" │                       │
- └─────────────┬─────────────┘                       │
-               │                                     │
-               └───────────────────┬─────────────────┘
-                                   │
-                                   ▼
- ┌─────────────────────────────────────────────────────────────────┐
- │                            main.tf                              │
- │                                                                 │
- │   resource "aws_subnet" "sub-main" {                            │
- │     vpc_id            = aws_vpc.main.id                         │
- │     cidr_block        = var.subnet_cidr          ◄── [From Var] │
- │     availability_zone = data.aws_az.names[0]     ◄── [From Data]│
- │     tags = {                                                    │
- │       Name = "${local.name_prefix}-subnet"       ◄── [From Local]│
- │     }                                                           │
- │   }                                                             │
- └─────────────────────────────────────────────────────────────────┘
+    
+     ┌───────────────────────────┐         ┌───────────────────────────┐
+     │   1. USER DATA CONTENT    │         │  2. LIVE CLOUD REALITIES  │
+     │  (Changes per deployment) │         │   (Controlled by the API) │
+     └─────────────┬─────────────┘         └─────────────┬─────────────┘
+                   │                                     │
+                   ▼                                     ▼
+     ┌───────────────────────────┐         ┌───────────────────────────┐
+     │     terraform.tfvars      │         │          data.tf          │
+     │   project_name = "ecom"   │         │ data "aws_ami" "linux"    │
+     │   environment  = "dev"    │         │ data "aws_az" "available" │
+     └─────────────┬─────────────┘         └─────────────┬─────────────┘
+                   │                                     │
+                   ▼                                     │
+     ┌───────────────────────────┐                       │
+     │       variables.tf        │                       │
+     │  Checks types, validates  │                       │
+     │  inputs from .tfvars file │                       │
+     └─────────────┬─────────────┘                       │
+                   │                                     │
+                   ▼                                     │
+     ┌───────────────────────────┐                       │
+     │         locals.tf         │                       │
+     │  Combines & fixes formatting │                    │
+     │  name_prefix = "ecom-dev" │                       │
+     └─────────────┬─────────────┘                       │
+                   │                                     │
+                   └───────────────────┬─────────────────┘
+                                       │
+                                       ▼
+     ┌─────────────────────────────────────────────────────────────────┐
+     │                            main.tf                              │
+     │                                                                 │
+     │   resource "aws_subnet" "sub-main" {                            │
+     │     vpc_id            = aws_vpc.main.id                         │
+     │     cidr_block        = var.subnet_cidr          ◄── [From Var] │
+     │     availability_zone = data.aws_az.names[0]     ◄── [From Data]│
+     │     tags = {                                                    │
+     │       Name = "${local.name_prefix}-subnet"       ◄── [From Local]│
+     │     }                                                           │
+     │   }                                                             │
+     └─────────────────────────────────────────────────────────────────┘
 
 ## 🪵 Breakdown of the Journey
 ### 🏭 Phase 1: Input InjectionData starts at terraform.tfvars where you supply environment-specific configurations (e.g., environment = "dev").This data is validated by your blueprint settings in variables.tf to verify it is safe to use.🏗️ 
