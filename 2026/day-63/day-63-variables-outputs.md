@@ -53,52 +53,58 @@ so when i change the region as the ami is constant it will automatically fetch t
 - then there are collection functions such as lenght which calculates length, lookup to search and toset to remove to remove duplicates.
 - also networking functions such as cidrsubnet("10.0.0.0/16", 8, 1)
 
-# 🗺️ The Terraform Data Flow
-    
-     ┌───────────────────────────┐         ┌───────────────────────────┐
-     │   1. USER DATA CONTENT    │         │  2. LIVE CLOUD REALITIES  │
-     │  (Changes per deployment) │         │   (Controlled by the API) │
-     └─────────────┬─────────────┘         └─────────────┬─────────────┘
-                   │                                     │
-                   ▼                                     ▼
-     ┌───────────────────────────┐         ┌───────────────────────────┐
-     │     terraform.tfvars      │         │          data.tf          │
-     │   project_name = "ecom"   │         │ data "aws_ami" "linux"    │
-     │   environment  = "dev"    │         │ data "aws_az" "available" │
-     └─────────────┬─────────────┘         └─────────────┬─────────────┘
-                   │                                     │
-                   ▼                                     │
-     ┌───────────────────────────┐                       │
-     │       variables.tf        │                       │
-     │  Checks types, validates  │                       │
-     │  inputs from .tfvars file │                       │
-     └─────────────┬─────────────┘                       │
-                   │                                     │
-                   ▼                                     │
-     ┌───────────────────────────┐                       │
-     │         locals.tf         │                       │
-     │  Combines & fixes formatting │                    │
-     │  name_prefix = "ecom-dev" │                       │
-     └─────────────┬─────────────┘                       │
-                   │                                     │
-                   └───────────────────┬─────────────────┘
-                                       │
-                                       ▼
-     ┌─────────────────────────────────────────────────────────────────┐
-     │                            main.tf                              │
-     │                                                                 │
-     │   resource "aws_subnet" "sub-main" {                            │
-     │     vpc_id            = aws_vpc.main.id                         │
-     │     cidr_block        = var.subnet_cidr          ◄── [From Var] │
-     │     availability_zone = data.aws_az.names[0]     ◄── [From Data]│
-     │     tags = {                                                    │
-     │       Name = "${local.name_prefix}-subnet"       ◄── [From Local]│
-     │     }                                                           │
-     │   }                                                             │
-     └─────────────────────────────────────────────────────────────────┘
 
-## 🪵 Breakdown of the Journey
-### 🏭 Phase 1: Input InjectionData starts at terraform.tfvars where you supply environment-specific configurations (e.g., environment = "dev").This data is validated by your blueprint settings in variables.tf to verify it is safe to use.🏗️ 
-### Phase 2: Internal RefineryBecause you can't run computations inside .tfvars, the validated variables enter the locals block.Here, the code engine combines the strings into a single standard naming pattern ("ecom-dev"), shielding your resources from repetitive updates.
-### 📡 Phase 3: Cloud SynchronizationConcurrently, data blocks send a real-time read-only query to AWS.They return active infrastructure facts like live AMI IDs and current Availability Zone layouts directly into memory.
-### 🚀 Phase 4: Main ConstructionEverything converges in main.tf.The resource blocks pick their pieces from the dynamic conveyor belt—injecting variables for networking, data sources for cloud placement, and locals for consistent infrastructure tagging.
+# Terraform Data Architecture Flow
+
+The flowchart below demonstrates how data values travel from external inputs, combine with cloud realities, and converge dynamically inside your infrastructure resource blocks.
+
+```text
+ ┌───────────────────────────┐         ┌───────────────────────────┐
+ │   1. USER DATA CONTENT    │         │  2. LIVE CLOUD REALITIES  │
+ │  (Changes per deployment) │         │   (Controlled by the API) │
+ └─────────────┬─────────────┘         └─────────────┬─────────────┘
+               │                                     │
+               ▼                                     ▼
+ ┌───────────────────────────┐         ┌───────────────────────────┐
+ │     terraform.tfvars      │         │          data.tf          │
+ │   project_name = "ecom"   │         │ data "aws_ami" "linux"    │
+ │   environment  = "dev"    │         │ data "aws_az" "available" │
+ └─────────────┬─────────────┘         └─────────────┬─────────────┘
+               │                                     │
+               ▼                                     │
+ ┌───────────────────────────┐                       │
+ │       variables.tf        │                       │
+ │  Checks types, validates  │                       │
+ │  inputs from .tfvars file │                       │
+ └─────────────┬─────────────┘                       │
+               │                                     │
+               ▼                                     │
+ ┌───────────────────────────┐                       │
+ │         locals.tf         │                       │
+ │  Combines & fixes formatting │                    │
+ │  name_prefix = "ecom-dev" │                       │
+ └─────────────┬─────────────┘                       │
+               │                                     │
+               └───────────────────┬─────────────────┘
+                                   │
+                                   ▼
+ ┌─────────────────────────────────────────────────────────────────┐
+ │                            main.tf                              │
+ │                                                                 │
+ │   resource "aws_subnet" "sub-main" {                            │
+ │     vpc_id            = aws_vpc.main.id                         │
+ │     cidr_block        = var.subnet_cidr          ◄── [From Var] │
+ │     availability_zone = data.aws_az.names     ◄── [From Data]│
+ │     tags = {                                                    │
+ │       Name = "\${local.name_prefix}-subnet"       ◄── [From Local]│
+ │     }                                                           │
+ │   }                                                             │
+ └─────────────────────────────────────────────────────────────────┘
+```
+
+### 🪵 Breakdown of the Journey
+
+1. **Input Injection:** Data starts at `terraform.tfvars` for environment-specific configurations and is validated by `variables.tf`.
+2. **Internal Refinery:** Validated variables enter the `locals` block to handle calculations and combine text strings into reusable shortcuts.
+3. **Cloud Synchronization:** Concurrently, `data` blocks fetch real-time infrastructure realities (like AMI IDs and active availability zones) directly from the cloud provider API.
+4. **Main Construction:** Everything converges dynamically inside `main.tf`, drawing the right attributes from inputs, logic, and cloud queries to build consistent infrastructure.
